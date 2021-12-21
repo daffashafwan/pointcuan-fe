@@ -3,8 +3,11 @@ import React from "react";
 import logo from "../../assets/images/logo.svg";
 import VectorFront from "../../components/VectorFront";
 import LoginPageIm from "../../assets/images/loginPage/LoginPage.svg";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
+  const navigate = useNavigate();
+
   return (
     <div
       className=" bg-no-repeat bg-cover h-screen w-screen"
@@ -17,9 +20,9 @@ function LoginPage() {
           <VectorFront />
           <div className="w-full aspect-w-0 aspect-h-0 flex justify-center">
             <form className="xl:basis-1/2 basis-full px-5 xl:px-0">
-              <div className="flex items-center inline text-center ml-8 xl:ml-6 mb-10 mt-20 ml-0 xl:mt-40">
-                <img src={logo} className="inline text-center " />
-                <h1 className="inline font-sans text-4xl text-center font-medium pl-2 text-orange-500">
+              <div className="flex items-center justify-center  inline text-center  mb-10 mt-20 xl:mt-40">
+                <img src={logo} className="text-center w-15 xl:w-20  " />
+                <h1 className="inline font-sans text-3xl xl:text-4xl text-center font-medium pl-2 text-orange-500">
                   PointCuan
                 </h1>
               </div>
@@ -52,15 +55,18 @@ function LoginPage() {
                 </button>
               </div>
               <div className="w-full text-center mt-5">
-                <a href="/forgetpassword" className="text-blue-600">
+                <a
+                  onClick={() => navigate("/forgetpassword")}
+                  className="text-blue-600 cursor-pointer"
+                >
                   lupa password ?
                 </a>
               </div>
-              <div className="xl:mt-20 mt-10 text-center">
+              <div className="xl:mt-20 mt-10 text-center ">
                 <p className="inline ">Belum Punya Akun?</p>
                 <a
-                  href="/register"
-                  className="inline border border-orange-500 rounded-xl px-3 py-1 ml-3"
+                  onClick={() => navigate("/register")}
+                  className="inline  items-center border border-orange-500 rounded-xl px-3 py-1 ml-3 cursor-pointer"
                 >
                   Daftar Disini
                 </a>

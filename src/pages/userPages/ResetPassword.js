@@ -4,7 +4,7 @@ import logo from "../../assets/images/logo.svg";
 import VectorFront from "../../components/VectorFront";
 import { useNavigate } from "react-router-dom";
 
-function ForgetPasswordPage() {
+function ResetPassword() {
   const navigate = useNavigate();
   return (
     <div className="container mx-auto">
@@ -12,22 +12,33 @@ function ForgetPasswordPage() {
         <VectorFront />
         <div className="w-full aspect-w-0 aspect-h-0 flex justify-center bg-orange-50 h-screen">
           <form className="xl:basis-1/2 basis-full px-5 xl:px-0">
-            <div className="flex items-center justify-center inline text-center  mb-3 mt-20 xl:mt-40">
-              <img src={logo} className="inline text-center " />
-              <h1 className="inline font-sans text-4xl text-center font-medium pl-2 text-orange-500">
+            <div className="flex items-center justify-center  inline text-center  mb-10 mt-20 xl:mt-40">
+              <img src={logo} className="text-center w-15 xl:w-20  " />
+              <h1 className="inline font-sans text-3xl xl:text-4xl text-center font-medium pl-2 text-orange-500">
                 PointCuan
               </h1>
             </div>
             <div className="w-full text-center mb-10">
               <p>Reset Password Anda</p>
             </div>
+
             <div>
               <input
-                id="email"
-                name="email"
-                type="email"
+                id="paswordbaru"
+                name="passowordbaru"
+                type="password"
                 required
-                placeholder="Email"
+                placeholder="Password Baru"
+                className="w-full py-2 px-5 text-primary border border-gray-600 rounded-xl outline-none text-sm transition duration-150 ease-in-out mb-4"
+              />
+            </div>
+            <div>
+              <input
+                id="paswordbaruulang"
+                name="passowordbaruulang"
+                type="password"
+                required
+                placeholder="Ulang Password Baru"
                 className="w-full py-2 px-5 text-primary border border-gray-600 rounded-xl outline-none text-sm transition duration-150 ease-in-out mb-4"
               />
             </div>
@@ -55,4 +66,4 @@ function ForgetPasswordPage() {
   );
 }
 
-export default ForgetPasswordPage;
+export default ResetPassword;
