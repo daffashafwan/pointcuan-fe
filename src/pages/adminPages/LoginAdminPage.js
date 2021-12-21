@@ -6,9 +6,9 @@ function LoginAdminPage() {
     <div className="bg-orange-500 h-screen">
       <div className="flex justify-center pt-20 ">
         <form className="xl:basis-2/5 bg-white xl:px-20 xl:py-10 rounded-md basis-4/5 px-6">
-          <div className="flex  inline text-center  mb-20 mt-20 xl:mt-5 justify-center">
-            <img src={logo} className="inline text-center " />
-            <h1 className="inline font-sans text-4xl text-center font-medium pl-2 text-orange-500">
+          <div className="flex items-center justify-center  inline text-center  mb-10 mt-20 xl:mt-40">
+            <img src={logo} className="text-center w-15 xl:w-20  " />
+            <h1 className="inline font-sans text-3xl xl:text-4xl text-center font-medium pl-2 text-orange-500">
               PointCuan
             </h1>
           </div>

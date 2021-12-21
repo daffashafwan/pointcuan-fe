@@ -20,9 +20,9 @@ function LoginPage() {
           <VectorFront />
           <div className="w-full aspect-w-0 aspect-h-0 flex justify-center">
             <form className="xl:basis-1/2 basis-full px-5 xl:px-0">
-              <div className="flex items-center justify-center inline text-center  mb-10 mt-20 xl:mt-40">
-                <img src={logo} className="inline text-center " />
-                <h1 className="inline font-sans text-4xl text-center font-medium pl-2 text-orange-500">
+              <div className="flex items-center justify-center  inline text-center  mb-10 mt-20 xl:mt-40">
+                <img src={logo} className="text-center w-15 xl:w-20  " />
+                <h1 className="inline font-sans text-3xl xl:text-4xl text-center font-medium pl-2 text-orange-500">
                   PointCuan
                 </h1>
               </div>
@@ -62,11 +62,11 @@ function LoginPage() {
                   lupa password ?
                 </a>
               </div>
-              <div className="xl:mt-20 mt-10 text-center">
+              <div className="xl:mt-20 mt-10 text-center ">
                 <p className="inline ">Belum Punya Akun?</p>
                 <a
                   onClick={() => navigate("/register")}
-                  className="inline border border-orange-500 rounded-xl px-3 py-1 ml-3 cursor-pointer"
+                  className="inline  items-center border border-orange-500 rounded-xl px-3 py-1 ml-3 cursor-pointer"
                 >
                   Daftar Disini
                 </a>
