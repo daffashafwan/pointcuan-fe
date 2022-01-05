@@ -1,12 +1,18 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../assets/images/logo.svg";
 import VectorFront from "../../components/VectorFront";
 import LoginPageIm from "../../assets/images/loginPage/LoginPage.svg";
 import { useNavigate } from "react-router-dom";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 function LoginPage() {
   const navigate = useNavigate();
+  const [hidePass, setHidePass] = useState(false);
+
+  const handlerHidePass = () => {
+    setHidePass(!hidePass);
+  };
 
   return (
     <div
@@ -36,15 +42,25 @@ function LoginPage() {
                   className="w-full py-2 px-5 text-primary border border-gray-600 rounded-xl outline-none text-sm transition duration-150 ease-in-out mb-4"
                 />
               </div>
-              <div>
+              <div className="w-full flex py-2 px-5  text-primary border border-gray-600 rounded-xl outline-none text-sm transition duration-150 ease-in-out mb-4">
                 <input
                   id="password"
                   name="password"
-                  type="password"
+                  type={hidePass == true ? "text" : "password"}
                   required
                   placeholder="Password"
-                  className="w-full py-2 px-5  text-primary border border-gray-600 rounded-xl outline-none text-sm transition duration-150 ease-in-out mb-4"
+                  className="w-20 basis-full"
                 />
+                <div
+                  className=" inline basis-2 w-full justify-end h-fit"
+                  onClick={handlerHidePass}
+                >
+                  {hidePass == true ? (
+                    <AiFillEyeInvisible className="inline text-center" />
+                  ) : (
+                    <AiFillEye className="inline text-center" />
+                  )}
+                </div>
               </div>
               <div>
                 <button
