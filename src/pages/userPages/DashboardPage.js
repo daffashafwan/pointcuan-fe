@@ -34,7 +34,7 @@ function DashboardPage() {
               <DashboardReedemRekomendasi />
             </div>
           </div>
-          {/* sisi kanan */}
+          {/* sisi kanan  */}
           <div className="grid ">
             <div className="">
               <DashboardRiwayatTransaksi />
