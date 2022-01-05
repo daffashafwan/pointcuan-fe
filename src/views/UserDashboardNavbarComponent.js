@@ -1,69 +1,71 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from "react";
 import logo from "../assets/images/logo.svg";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 export const UserDashboardNavbarComponent = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
-    <div className="bg-whtie border-b-4 border-gray xl:px-10 px-5">
-      <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-      {menuOpen && <MobileMenu>{navLinks}</MobileMenu>}
-    </div>
+    <>
+      <nav className="relative flex flex-wrap items-center justify-between px-2 py-1 bg-white fill-black mb-3 border border-2 border-b-gray-200 ">
+        <div className="container px-4 mx-auto flex flex-wrap items-center justify-between container px-1 md:px-10">
+          <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
+            <a
+              className="text-xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap  text-black"
+              href="#pablo"
+            >
+              <img src={logo} className=" w-8 xl:w-10 mr-3 inline" />
+              Point Cuan
+            </a>
+            <div
+              className="text-black cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
+              onClick={() => setNavbarOpen(!navbarOpen)}
+            >
+              <GiHamburgerMenu className="mt-3" />
+            </div>
+          </div>
+          <div
+            className={
+              "lg:flex flex-grow items-center" +
+              (navbarOpen ? " flex" : " hidden")
+            }
+            id="example-navbar-danger"
+          >
+            <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
+              <li className="nav-item">
+                <a
+                  className="px-3 py-2 flex items-center text-sm md:text-lg font-normal leading-snug text-black hover:opacity-75"
+                  href="#"
+                >
+                  <i className="fab fa-facebook-square text-lg  leading-lg text-black opacity-75"></i>
+                  <span className="ml-2">Beranda</span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="px-3 py-2 flex items-center text-sm md:text-lg font-normal leading-snug text-black hover:opacity-75"
+                  href="#"
+                >
+                  <i className="fab fa-twitter text-lg leading-lg text-black opacity-75"></i>
+                  <span className="ml-2">Catatan Transaksi</span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="px-3 py-2 flex items-center text-sm md:text-lg font-normal leading-snug text-black hover:opacity-75"
+                  href="#"
+                >
+                  <i className="fab fa-pinterest text-lg leading-lg text-black opacity-75"></i>
+                  <span className="ml-2">Akun</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </>
   );
 };
-
-const pages = ["Beranda", "Catatan Tansaksi", "Akun"];
-const navLinks = pages.map((page) => (
-  <a
-    key={page}
-    className="no-underline text-balck font-semibold hover:text-gray-600"
-    href={`#${page}`}
-  >
-    {page}
-  </a>
-));
-
-const Navbar = ({ menuOpen, setMenuOpen }) => (
-  <div className="flex items-center justify-between p-4">
-    <div className="flex items-center">
-      <img src={logo} className="w-9 mr-4" />
-      <a
-        href="#home"
-        className="text-xl font-bold no-underline text-balck hover:text-gray-600"
-      >
-        PoinCuan
-      </a>
-    </div>
-    <nav className="hidden md:block space-x-6">{navLinks}</nav>
-    <button
-      type="button"
-      aria-label="Toggle mobile menu"
-      onClick={() => setMenuOpen(!menuOpen)}
-      className="rounded md:hidden focus:outline-none focus:ring focus:ring-gray-500 focus:ring-opacity-50"
-    >
-      <MenuAlt4Svg menuOpen={menuOpen} />
-    </button>
-  </div>
-);
-
-const MobileMenu = ({ children }) => (
-  <nav className="p-4 flex flex-col space-y-3 md:hidden">{children}</nav>
-);
-
-const MenuAlt4Svg = ({ menuOpen }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className={`transition duration-100 ease h-8 w-8 ${
-      menuOpen ? "transform rotate-90" : ""
-    }`}
-    viewBox="0 0 20 20"
-    fill="currentColor"
-  >
-    <path
-      fillRule="evenodd"
-      d="M3 7a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 13a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-      clipRule="evenodd"
-    />
-  </svg>
-);
 
 export default UserDashboardNavbarComponent;
