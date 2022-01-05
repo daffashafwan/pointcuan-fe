@@ -10,7 +10,7 @@ import UserDashboardNavbarComponent from "../../views/UserDashboardNavbarCompone
 import UserFooterComponent from "../../views/UserFooterComponent";
 
 function DashboardPage() {
-  const percentage = 13;
+  const percentage = 40;
   return (
     <div>
       <UserDashboardNavbarComponent />
