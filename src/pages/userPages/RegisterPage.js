@@ -10,7 +10,6 @@ import Swal from "sweetalert2";
 
 function RegisterPage() {
   const navigate = useNavigate();
-  const cookie_key = 'user_cred';
   const [formState, setFormState] = useState({
     login: true,
     username: '',
@@ -27,29 +26,16 @@ function RegisterPage() {
     }
   };
   const saveFormData = async () => {
-    var bodyFormData = new URLSearchParams();
-    bodyFormData.append("name", formState.name);
-    bodyFormData.append("email", formState.email);
-    bodyFormData.append("username", formState.username);
-    bodyFormData.append("password", formState.password);
-    bodyFormData.append("address", formState.address);
-
+    var bodyFormData = {
+      name: formState.name,
+      email: formState.email,
+      username: formState.username,
+      password: formState.password,
+      address: formState.address,
+    }
     axios.post(BASE_URL_API + 'users/register',
       bodyFormData, HEADER_API)
       .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-  const onSubmit = async (event) => {
-    event.preventDefault(); // Prevent default submission
-    try {
-        await saveFormData();
-        setFormState({
-            name: '', username: '', email: '', password: '', address: ''
-        });
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -58,21 +44,46 @@ function RegisterPage() {
           timer: 1200
         });
         setTimeout(function () {
-          navigate('/');
+          navigate('/register');
         }, 1500)
-    } catch (e) {
-      Swal.fire({
-        position: 'top-end',
-        icon: 'warning',
-        title: 'Gagal Daftar',
-        showConfirmButton: false,
-        timer: 1200
+        console.log(response);
+      })
+      .catch(function (error) {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'warning',
+          title: 'Gagal Daftar',
+          text: error.response.data.data,
+          showConfirmButton: false,
+          timer: 1200
+        });
+        setTimeout(function () {
+          navigate('/register');
+        }, 1500)
+        console.log(error.response);
       });
-      setTimeout(function () {
-        navigate('/register');
-      }, 1500)
+  }
+  const onSubmit = async (event) => {
+    event.preventDefault(); // Prevent default submission
+    try {
+      if (formState.password === formState.retypePassword) {
+        await saveFormData();
+        setFormState({
+          name: '', username: '', email: '', password: '', address: '', retypePassword: ''
+        });
+      }else{
+        Swal.fire({
+          position: 'top-end',
+          icon: 'warning',
+          title: 'Password tidak sama',
+          showConfirmButton: false,
+          timer: 1200
+        });
+      }
+    } catch (e) {
+      console.log(e.message)
     }
-}
+  }
   return (
     <div
       className=" bg-no-repeat bg-cover h-screen w-screen"
@@ -96,6 +107,7 @@ function RegisterPage() {
                   id="nama"
                   name="nama"
                   type="text"
+                  value={formState.name}
                   onChange={set('name')}
                   required
                   placeholder="Nama"
@@ -107,6 +119,7 @@ function RegisterPage() {
                   id="email"
                   name="email"
                   type="email"
+                  value={formState.email}
                   onChange={set('email')}
                   required
                   placeholder="Email"
@@ -118,6 +131,7 @@ function RegisterPage() {
                   id="username"
                   name="username"
                   type="text"
+                  value={formState.username}
                   onChange={set('username')}
                   required
                   placeholder="Username"
@@ -129,6 +143,7 @@ function RegisterPage() {
                   id="password"
                   name="password"
                   type="password"
+                  value={formState.password}
                   onChange={set('password')}
                   required
                   placeholder="Password"
@@ -140,6 +155,7 @@ function RegisterPage() {
                   id="password"
                   name="password"
                   type="password"
+                  value={formState.retypePassword}
                   onChange={set('retypePassword')}
                   required
                   placeholder="Password"
