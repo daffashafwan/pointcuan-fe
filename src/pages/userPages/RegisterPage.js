@@ -1,18 +1,95 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
+import axios from "axios";
 import logo from "../../assets/images/logo.svg";
+import { BASE_URL_API, HEADER_API } from "../../config/urlApi";
 import VectorFront from "../../components/VectorFront";
 import LoginPageIm from "../../assets/images/loginPage/LoginPage.svg";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 function RegisterPage() {
-  const navigaet = useNavigate();
+  const navigate = useNavigate();
+  const [formState, setFormState] = useState({
+    login: true,
+    username: '',
+    address: '',
+    password: '',
+    email: '',
+    retypePassword: '',
+    name: ''
+  });
   const [hidePass, setHidePass] = useState(false);
 
   const handlerHidePass = () => {
     setHidePass(!hidePass);
   };
+  const set = name => {
+    return ({ target: { value } }) => {
+      setFormState(oldValues => ({ ...oldValues, [name]: value }));
+      console.log(formState)
+    }
+  };
+  const saveFormData = async () => {
+    var bodyFormData = {
+      name: formState.name,
+      email: formState.email,
+      username: formState.username,
+      password: formState.password,
+      address: formState.address,
+    }
+    axios.post(BASE_URL_API + 'users/register',
+      bodyFormData, HEADER_API)
+      .then(function (response) {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Berhasil Daftar',
+          showConfirmButton: false,
+          timer: 1200
+        });
+        setTimeout(function () {
+          navigate('/register');
+        }, 1500)
+        console.log(response);
+      })
+      .catch(function (error) {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'warning',
+          title: 'Gagal Daftar',
+          text: error.response.data.data,
+          showConfirmButton: false,
+          timer: 1200
+        });
+        setTimeout(function () {
+          navigate('/register');
+        }, 1500)
+        console.log(error.response);
+      });
+  }
+  const onSubmit = async (event) => {
+    event.preventDefault(); // Prevent default submission
+    try {
+      if (formState.password === formState.retypePassword) {
+        await saveFormData();
+        setFormState({
+          name: '', username: '', email: '', password: '', address: '', retypePassword: ''
+        });
+      } else {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'warning',
+          title: 'Password tidak sama',
+          showConfirmButton: false,
+          timer: 1200
+        });
+      }
+    } catch (e) {
+      console.log(e.message)
+    }
+  }
   return (
     <div
       className=" bg-no-repeat bg-cover h-screen w-screen"
@@ -24,7 +101,7 @@ function RegisterPage() {
         <div className="grid grid-cols-1 gap-y-5 gap-x-5 sm:grid-cols-1 gap-x-6 lg:grid-cols-2 xl:grid-cols-2 xl:gap-x-8 ">
           <VectorFront />
           <div className="w-full aspect-w-0 aspect-h-0 flex justify-center">
-            <form className="xl:basis-1/2 basis-full px-5 xl:px-0">
+            <form onSubmit={onSubmit} className="xl:basis-1/2 basis-full px-5 xl:px-0">
               <div className="flex items-center justify-center  inline text-center  mb-10 mt-20 xl:mt-40">
                 <img src={logo} className="text-center w-15 xl:w-20  " />
                 <h1 className="inline font-sans text-3xl xl:text-4xl text-center font-medium pl-2 text-orange-500">
@@ -36,6 +113,8 @@ function RegisterPage() {
                   id="nama"
                   name="nama"
                   type="text"
+                  value={formState.name}
+                  onChange={set('name')}
                   required
                   placeholder="Nama"
                   className="w-full py-2 px-3 text-primary border border-gray-600 rounded-xl outline-none text-sm transition duration-150 ease-in-out mb-4"
@@ -46,6 +125,8 @@ function RegisterPage() {
                   id="email"
                   name="email"
                   type="email"
+                  value={formState.email}
+                  onChange={set('email')}
                   required
                   placeholder="Email"
                   className="w-full py-2 px-3 text-primary border border-gray-600 rounded-xl outline-none text-sm transition duration-150 ease-in-out mb-4"
@@ -56,6 +137,8 @@ function RegisterPage() {
                   id="username"
                   name="username"
                   type="text"
+                  value={formState.username}
+                  onChange={set('username')}
                   required
                   placeholder="Username"
                   className="w-full py-2 px-3 text-primary border border-gray-600 rounded-xl outline-none text-sm transition duration-150 ease-in-out mb-4"
@@ -65,6 +148,20 @@ function RegisterPage() {
                 <input
                   id="password"
                   name="password"
+                  type="password"
+                  value={formState.password}
+                  onChange={set('password')}
+                  required
+                  placeholder="Password"
+                  className="w-full py-2 px-3 text-primary border border-gray-600 rounded-xl outline-none text-sm transition duration-150 ease-in-out mb-4"
+                />
+              </div>
+              <div>
+                <input
+                  id="password"
+                  name="password"
+                  value={formState.retypePassword}
+                  onChange={set('retypePassword')}
                   type={hidePass == true ? "text" : "password"}
                   required
                   placeholder="Password"
@@ -98,7 +195,7 @@ function RegisterPage() {
               <div className="xl:mt-20 mt-10 text-center pb-5">
                 <p className="inline ">Sudah Punya Akun?</p>
                 <a
-                  onClick={() => navigaet("/")}
+                  onClick={() => navigate("/")}
                   className="inline border border-orange-500 rounded-xl px-3 py-1  ml-3 cursor-pointer"
                 >
                   Masuk Disini
