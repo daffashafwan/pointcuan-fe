@@ -14,7 +14,7 @@ function DashboardPage() {
   return (
     <div>
       <UserDashboardNavbarComponent />
-      <div className="container mx-auto ">
+      <div className="container mx-auto pt-11">
         {/* sisi kiri */}
         <div className="grid grid-cols-1  sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 ">
           {/* sisi kiri */}

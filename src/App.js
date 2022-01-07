@@ -5,6 +5,7 @@ import ForgetPasswordPage from "./pages/userPages/ForgetPasswordPage";
 import LoginPage from "./pages/userPages/LoginPage";
 import RegisterPage from "./pages/userPages/RegisterPage";
 import ResetPassword from "./pages/userPages/ResetPassword";
+import RiwayatTransaksiPage from "./pages/userPages/RiwayatTransaksiPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/forgetpassword" element={<ForgetPasswordPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/riwayattransaksi" element={<RiwayatTransaksiPage />} />
         <Route path="/loginadmin" element={<LoginAdminPage />} />
         <Route
           path="/forgetpassword/resetpassword"

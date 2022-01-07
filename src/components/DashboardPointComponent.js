@@ -18,7 +18,7 @@ function DashboardPointComponent() {
           <label for="totalPenjualan">Total Penjualan</label>
           <br />
           <input
-            type="text"
+            type="number"
             id="totalPenjualan"
             name="totalPenjualan"
             className="border border-black w-full py-2 px-4 rounded-md my-3"
