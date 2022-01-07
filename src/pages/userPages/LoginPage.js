@@ -1,17 +1,23 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useState} from "react";
+import React, { useState } from "react";
 import logo from "../../assets/images/logo.svg";
 import VectorFront from "../../components/VectorFront";
 import LoginPageIm from "../../assets/images/loginPage/LoginPage.svg";
 import { useNavigate } from "react-router-dom";
-import {bake_cookies} from "sfcookies"
+import { bake_cookies } from "sfcookies"
 import { BASE_URL_API, HEADER_API } from "../../config/urlApi";
 import Swal from "sweetalert2";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import axios from "axios";
 
 function LoginPage() {
   const navigate = useNavigate();
   const cookie_key = 'user_cred';
+  const [hidePass, setHidePass] = useState(false);
+
+  const handlerHidePass = () => {
+    setHidePass(!hidePass);
+  };
   const [formState, setFormState] = useState({
     username: '',
     password: '',
@@ -41,7 +47,7 @@ function LoginPage() {
           timer: 1200
         });
         setTimeout(function () {
-          navigate('/');
+          navigate('/dashboard');
         }, 1500)
         console.log(response);
       })
@@ -63,23 +69,14 @@ function LoginPage() {
   const onSubmit = async (event) => {
     event.preventDefault(); // Prevent default submission
     try {
-        await handleLogin();
-        setFormState({
-          username: '', password: ''
-        });
+      await handleLogin();
+      setFormState({
+        username: '', password: ''
+      });
     } catch (e) {
       console.log(e.message)
     }
   }
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-
-function LoginPage() {
-  const navigate = useNavigate();
-  const [hidePass, setHidePass] = useState(false);
-
-  const handlerHidePass = () => {
-    setHidePass(!hidePass);
-  };
   return (
     <div
       className=" bg-no-repeat bg-cover h-screen w-screen"

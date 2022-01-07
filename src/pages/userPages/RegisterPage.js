@@ -7,6 +7,7 @@ import VectorFront from "../../components/VectorFront";
 import LoginPageIm from "../../assets/images/loginPage/LoginPage.svg";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 function RegisterPage() {
   const navigate = useNavigate();
@@ -19,6 +20,11 @@ function RegisterPage() {
     retypePassword: '',
     name: ''
   });
+  const [hidePass, setHidePass] = useState(false);
+
+  const handlerHidePass = () => {
+    setHidePass(!hidePass);
+  };
   const set = name => {
     return ({ target: { value } }) => {
       setFormState(oldValues => ({ ...oldValues, [name]: value }));
@@ -71,7 +77,7 @@ function RegisterPage() {
         setFormState({
           name: '', username: '', email: '', password: '', address: '', retypePassword: ''
         });
-      }else{
+      } else {
         Swal.fire({
           position: 'top-end',
           icon: 'warning',
@@ -84,15 +90,6 @@ function RegisterPage() {
       console.log(e.message)
     }
   }
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-
-function RegisterPage() {
-  const navigaet = useNavigate();
-  const [hidePass, setHidePass] = useState(false);
-
-  const handlerHidePass = () => {
-    setHidePass(!hidePass);
-  };
   return (
     <div
       className=" bg-no-repeat bg-cover h-screen w-screen"
