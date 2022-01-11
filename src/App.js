@@ -7,6 +7,7 @@ import RegisterPage from "./pages/userPages/RegisterPage";
 import ResetPassword from "./pages/userPages/ResetPassword";
 import RiwayatRedeemPage from "./pages/userPages/RiwayatRedeemPage";
 import RiwayatTransaksiPage from "./pages/userPages/RiwayatTransaksiPage";
+import BasePage from "./pages/adminPages/BasePage";
 
 function App() {
   return (
@@ -23,6 +24,11 @@ function App() {
         <Route
           path="/forgetpassword/resetpassword"
           element={<ResetPassword />}
+        />
+
+        <Route
+          path="/admin"
+          element={<BasePage />}
         />
       </Routes>
     </div>
