@@ -15,28 +15,28 @@ function DashboardReedemPoint() {
             Reedem Point
           </p>
         </div>
-        <div className="grid grid-cols-3 sm:grid-cols-6 gap-x-10 gap-y-2 justify-items-center  md:gap-x-6 justify-items-center text-xs md:text-sm text-center px-5 ">
-          <div className="mx-2 w-10 ">
+        <div className="grid  md:grid-cols-6  justify-items-center grid-cols-3 gap-x-10 gap-y-2  text-xs md:text-sm text-center px-5 w-full ">
+          <div className="mx-2 w-10 basis-1/6">
             <img src={pulsa} className=" " />
             <p className="hidden md:block">Pulsa</p>
           </div>
-          <div className="mx-2 w-10 ">
+          <div className="mx-2 w-10 md:basis-1/6 basis-1/3">
             <img src={data} className=" " />
             <p className="hidden md:block">Data</p>
           </div>
-          <div className="mx-2 w-10 ">
+          <div className="mx-2 w-10 md:basis-1/6  basis-1/3">
             <img src={emoney} className=" " />
             <p className="hidden md:block ">E-Money</p>
           </div>
-          <div className="mx-2 w-10 ">
+          <div className="mx-2 w-10 md:basis-1/6  basis-1/3">
             <img src={pln} className=" " />
             <p className="hidden md:block">PLN</p>
           </div>
-          <div className="mx-2 w-10 ">
+          <div className="mx-2 w-10 md:basis-1/6 basis-1/3 ">
             <img src={cashout} className=" " />
             <p className="hidden md:block">Cashout</p>
           </div>
-          <div className="mx-2 w-10 ">
+          <div className="mx-2 w-10 md:basis-1/6 basis-1/3">
             <img src={lainnya} className="" />
             <p className="hidden md:block">Lainnya</p>
           </div>

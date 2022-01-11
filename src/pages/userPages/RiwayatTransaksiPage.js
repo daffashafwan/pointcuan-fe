@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react/cjs/react.development";
 import UserDashboardNavbarComponent from "../../views/UserDashboardNavbarComponent";
 import UserFooterComponent from "../../views/UserFooterComponent";
-import { AiFillEye, AiOutlineClose } from "react-icons/ai";
+
 import TableRiwayatTransaksi from "../../components/TableRiwayatTransaksi";
 
 function RiwayatTransaksiPage() {
