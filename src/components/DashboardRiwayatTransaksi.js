@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 function DashboardRiwayatTransaksi() {
   return (
     <div lassName=" grid  grid-cols-1">
-      <div className="grid grid-cols-1 place-content-center  bg-white p-10 rounded-3xl drop-shadow-xl w-100 mt-5 mx-10">
+      <div className="grid grid-cols-1 place-content-center  bg-white py-10 px-6 md:p-10 rounded-3xl drop-shadow-xl w-100 mt-5 mx-10">
         <div className="grid grid-cols-1 md:grid-cols-2  pt-5">
           <div>
-            <p className="font-bold text-sm md:text-md mb-5 text-center">
+            <p className="font-bold text-sm md:text-md mb-5 text-center md:text-left">
               Riwayat Transaksi
             </p>
           </div>
