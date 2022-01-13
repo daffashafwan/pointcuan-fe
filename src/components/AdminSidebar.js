@@ -1,11 +1,27 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AdminContext } from "../contexts/AdminSidebarContext";
 import { links } from '../datas/AdminSidebarData';
 import { MenuIcon } from '@heroicons/react/solid';
 import { Route, Switch } from "react-router";
 
 const AdminSidebar = () => {
-    const { isSidebarOpen, closeSidebar } = useContext(AdminContext);
+    const [isMobile, setIsMobile] = useState(false)
+    const [clicked, setClicked] = useState(1)
+    const { menu, setMenu, isSidebarOpen, closeSidebar } = useContext(AdminContext);
+    const handleMenu = (idx) => {
+        setMenu(idx)
+    }
+    const handleResize = () => {
+        if (window.innerWidth < 720) {
+            setIsMobile(true)
+        } else {
+            setIsMobile(false)
+        }
+    }
+    useEffect(() => {
+        window.addEventListener("resize", handleResize)
+    }, [])
+      
 
     return (
 
@@ -44,11 +60,8 @@ const AdminSidebar = () => {
                             return (
                                 <a
                                     key={id}
-                                    href={url}
-                                    className={`capitalize flex items-center px-4 py-2 ${index === 0
-                                        ? 'bg-gray-200 text-gray-700'
-                                        : null
-                                        } ${index > 0
+                                    onClick={() => handleMenu(id)}
+                                    className={`capitalize btn-menu btn-${id} flex items-center px-4 py-2 ${index > -1
                                             ? 'mt-5 text-gray-600 hover:bg-gray-200 hover:text-gray-700 transition-colors duration-200 transform'
                                             : null
                                         } rounded-md`}

@@ -1,26 +1,100 @@
+import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
+import { BASE_URL_API, HEADER_API } from "../../../config/urlApi";
+import { AdminContext } from "../../../contexts/AdminSidebarContext";
+import Swal from "sweetalert2";
+
 const PCRPage = () => {
+    const { menu } = useContext(AdminContext)
+    const [point, setPoint] = useState(0)
+    const [formState, setFormState] = useState({
+        point: 0,
+    });
+
+    useEffect(() => {
+        axios.get(BASE_URL_API + 'pcr')
+            .then(function (response) {
+                setPoint(response.data.data.pcrValue)
+                console.log(response.data);
+            })
+            .catch(function (error) {
+                console.log(error.response);
+            });
+    }, [])
+
+    const set = name => {
+        return ({ target: { value } }) => {
+            setFormState(oldValues => ({ ...oldValues, [name]: value }));
+        }
+    };
+
+    const handleUpdate = () => {
+        var bodyFormData = {
+            pcrValue: formState.point,
+        }
+        console.log(bodyFormData)
+        Swal.fire({
+            title: 'Update Point',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.put(BASE_URL_API + 'pcr', bodyFormData)
+                    .then(function (response) {
+                        console.log(response.data);
+                        Swal.fire(
+                            'Berhasil Update!',
+                            'PCR Berhasil Diupdate',
+                            'success'
+                        )
+                        setPoint(bodyFormData.pcrValue)
+                    })
+                    .catch(function (error) {
+                        console.log(error.response);
+                    });
+            }
+        })
+    }
+
     return (
-        <div lassName=" grid  grid-cols-1">
-            <div className="grid grid-cols-1 place-content-center bg-orange-500 p-10 rounded-3xl drop-shadow-xl w-5/5 mt-5 mx-10">
-                <div className="grid grid-cols-1 px-5">
-                    <p className="font-bold mb-5 pl-5 text-white">Reedem Rekomendasi</p>
-                </div>
-                <div className="grid grid-cols-3 place-content-center text-center gap-x-1 md:gap-x-2 text-orange-500 text-xs md:text-sm font-semibold px-5">
-                    <div className=" ">
-                        <div className="bg-white px-1 md:px-8 py-3 rounded-2xl">
-                            Pulsa By.u 50.000
+        <div className="container mx-auto">
+            <div className="grid grid-cols-1 gap-y-5 gap-x-5 sm:grid-cols-1 sm:gap-x-6 lg:grid-cols-1 xl:grid-cols-1 xl:gap-x-1 ">
+                <div className="w-full aspect-w-0 aspect-h-0 flex justify-center">
+                    <form className="xl:basis-1/2 basis-full px-5 xl:px-0">
+                        <div className="grid inline text-left  mb-10 mt-20 xl:mt-40">
+                            <h1 className="inline font-sans text-3xl xl:text-4xl text-left font-medium text-orange-500">
+                                PCR (Point Conversion Rate)
+                            </h1>
+                            <p className="inline font-sans text-3xl xl:text-3xl font-medium text-black">
+                                Point Sekarang : {point}
+                            </p>
                         </div>
-                    </div>
-                    <div className=" ">
-                        <div className="bg-white px-1 md:px-8 py-3 rounded-2xl">
-                            Pulsa By.u 50.000
+                        <div>
+                            <input
+                                id="pcr"
+                                name="pcr"
+                                type="number"
+                                value={formState.point}
+                                onChange={set('point')}
+                                required
+                                placeholder="PCR"
+                                className="w-full py-2 px-3 text-primary border border-gray-600 rounded-xl outline-none text-sm transition duration-150 ease-in-out mb-4"
+                            />
                         </div>
-                    </div>
-                    <div className="">
-                        <div className="bg-white px-1 md:px-8 py-3 rounded-2xl">
-                            Pulsa By.u 50.000
+                        <div>
+                            <button
+                                type="button"
+                                onClick={() => handleUpdate()}
+                                className="w-full border  rounded-xl px-5 py-2 bg-orange-500 font-sans text-white font-bold "
+                            >
+                                Update
+                            </button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
