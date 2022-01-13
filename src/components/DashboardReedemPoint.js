@@ -5,6 +5,7 @@ import emoney from "../assets/images/reedemPointCategory/emoney.svg";
 import pln from "../assets/images/reedemPointCategory/pln.svg";
 import cashout from "../assets/images/reedemPointCategory/cashout.svg";
 import lainnya from "../assets/images/reedemPointCategory/lainnya.svg";
+import { Link } from "react-router-dom";
 
 function DashboardReedemPoint() {
   return (
@@ -17,28 +18,40 @@ function DashboardReedemPoint() {
         </div>
         <div className="grid  md:grid-cols-6  justify-items-center grid-cols-3 gap-x-10 gap-y-2  text-xs md:text-sm text-center px-5 w-full ">
           <div className="mx-2 w-10 basis-1/6">
-            <img src={pulsa} className=" " />
-            <p className="hidden md:block">Pulsa</p>
+            <Link to="/redeem/pulsa">
+              <img src={pulsa} className=" " />
+              <p className="hidden md:block md:mt-1">Pulsa</p>
+            </Link>
           </div>
           <div className="mx-2 w-10 md:basis-1/6 basis-1/3">
-            <img src={data} className=" " />
-            <p className="hidden md:block">Data</p>
+            <Link to="/redeem/data">
+              <img src={data} className=" " />
+              <p className="hidden md:block md:mt-1">Data</p>
+            </Link>
           </div>
           <div className="mx-2 w-10 md:basis-1/6  basis-1/3">
-            <img src={emoney} className=" " />
-            <p className="hidden md:block ">E-Money</p>
+            <Link to="/redeem/emoney">
+              <img src={emoney} className=" " />
+              <p className="hidden md:block md:mt-1">E~Money</p>
+            </Link>
           </div>
           <div className="mx-2 w-10 md:basis-1/6  basis-1/3">
-            <img src={pln} className=" " />
-            <p className="hidden md:block">PLN</p>
+            <Link to="/redeem/pln">
+              <img src={pln} className=" " />
+              <p className="hidden md:block md:mt-1">PLN</p>
+            </Link>
           </div>
           <div className="mx-2 w-10 md:basis-1/6 basis-1/3 ">
-            <img src={cashout} className=" " />
-            <p className="hidden md:block">Cashout</p>
+            <Link to="/redeem/cashout">
+              <img src={cashout} className=" " />
+              <p className="hidden md:block md:mt-1">Cashout</p>
+            </Link>
           </div>
           <div className="mx-2 w-10 md:basis-1/6 basis-1/3">
-            <img src={lainnya} className="" />
-            <p className="hidden md:block">Lainnya</p>
+            <Link to="/redeem/lainnya">
+              <img src={lainnya} className="" />
+              <p className="hidden md:block md:mt-1">Lainnya</p>
+            </Link>
           </div>
         </div>
       </div>

@@ -68,7 +68,7 @@ function RegisterPage() {
                   type={hidePass == true ? "text" : "password"}
                   required
                   placeholder="Password"
-                  className="w-20 basis-full py-2 px-5  text-primary rounded-xl"
+                  className="w-20 basis-full py-2 px-5  text-primary rounded-xl border-hidden outline-none"
                 />
                 <div
                   className=" inline basis-2 w-full justify-end align-middle "

@@ -1,8 +1,8 @@
 import React from "react";
 import iconAddPoint from "../assets/images/iconAddPoint.svg";
 import { MdOutlineAddCircle } from "react-icons/md";
-import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
 
 const MySwal = withReactContent(Swal);
 
