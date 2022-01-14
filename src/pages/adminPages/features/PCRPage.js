@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { BASE_URL_API, HEADER_API } from "../../../config/urlApi";
-import { AdminContext } from "../../../contexts/AdminSidebarContext";
+import { AdminContext } from "../../../contexts/AdminContext";
 import Swal from "sweetalert2";
 
 const PCRPage = () => {

@@ -1,7 +1,7 @@
 import { CameraIcon } from '@heroicons/react/solid'
 import PCRPage from '../pages/adminPages/features/PCRPage';
 import TransactionPage from '../pages/adminPages/features/TransactionPage';
-import CategoryPage from '../pages/adminPages/features/CategoryPage';
+import CategoryPage from '../pages/adminPages/features/Category/CategoryPage';
 import UserPage from '../pages/adminPages/features/UserPage';
 import RedeemPage from '../pages/adminPages/features/RedeemPage';
 import ItemPage from '../pages/adminPages/features/ItemPage';

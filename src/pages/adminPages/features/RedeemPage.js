@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { BASE_URL_API, HEADER_API } from "../../../config/urlApi";
 import Swal from "sweetalert2";
-//import Table from 'react-tailwind-table';
-import DataTable from 'react-data-table-component';
+import Table, {SelectColumnFilter} from '../../../components/Table'
 
 
 const RedeemPage = () => {
@@ -26,24 +25,24 @@ const RedeemPage = () => {
 
     const columns = [
         {
-            name: 'Nama User',
-            selector: row => row.name,
+            Header: 'Nama User',
+            accessor: 'name',
         },
         {
-            name: 'Username',
-            selector: row => row.username,
+            Header: 'Username',
+            accessor: 'username',
         },
         {
-            name: 'Point',
-            selector: row => row.point,
+            Header: 'Point',
+            accessor: 'point',
         },
         {
-            name: 'Email',
-            selector: row => row.email,
+            Header: 'Email',
+            accessor: 'email',
         },
         {
-            name: 'Alamat',
-            selector: row => row.address,
+            Header: 'Alamat',
+            accessor: 'address',
         },
     ];
 
@@ -59,10 +58,12 @@ const RedeemPage = () => {
             <div className="grid grid-cols-4 gap-y-5 gap-x-5 sm:grid-cols-1 sm:gap-x-6 lg:grid-cols-1 xl:grid-cols-1 xl:gap-x-1 ">
                 <div className="mt-10 w-full aspect-w-0 aspect-h-0 flex justify-center">
                     <div className="basis-full px-5 xl:px-0">
-                        <DataTable
-                            columns={columns}
-                            data={data}
-                        />
+                    {data ?
+                            <Table
+                                columns={columns}
+                                data={data}
+                            />
+                            : "loading"}
                     </div>
                 </div>
             </div>

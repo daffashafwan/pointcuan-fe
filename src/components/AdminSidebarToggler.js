@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { MenuIcon } from '@heroicons/react/solid';
-import { AdminContext } from "../contexts/AdminSidebarContext"
+import { AdminContext } from "../contexts/AdminContext"
 const AdminSidebarToggler = () => {
 	const { openSidebar, isSidebarOpen } = useContext(AdminContext);
 

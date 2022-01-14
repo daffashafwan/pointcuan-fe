@@ -1,6 +1,6 @@
 import AdminSidebar from "../../components/AdminSidebar";
 import AdminSidebarToggler from "../../components/AdminSidebarToggler";
-import { AppProvider } from "../../contexts/AdminSidebarContext";
+import { AppProvider } from "../../contexts/AdminContext";
 import FeaturePage from "./features/FeaturesPage";
 
 const BasePage = () => {

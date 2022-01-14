@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { AdminContext } from "../contexts/AdminSidebarContext";
+import { AdminContext } from "../contexts/AdminContext";
 import { links } from '../datas/AdminSidebarData';
 import { MenuIcon } from '@heroicons/react/solid';
 import { Route, Switch } from "react-router";

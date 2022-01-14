@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { AdminContext } from "../../../contexts/AdminSidebarContext";
+import { AdminContext } from "../../../contexts/AdminContext";
 import PCRPage from "./PCRPage";
 import { Route, Switch } from "react-router";
 import { links } from '../../../datas/AdminSidebarData';
@@ -20,7 +20,6 @@ const FeaturePage = () => {
             <>
                 {componentss.components}
             </>
-
         )
     } else {
         return (
