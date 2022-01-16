@@ -4,7 +4,7 @@ import TransactionPage from '../pages/adminPages/features/TransactionPage';
 import CategoryPage from '../pages/adminPages/features/Category/CategoryPage';
 import UserPage from '../pages/adminPages/features/UserPage';
 import RedeemPage from '../pages/adminPages/features/RedeemPage';
-import ItemPage from '../pages/adminPages/features/ItemPage';
+import ItemPage from '../pages/adminPages/features/Item/ItemPage';
 export const links = [
 	{
 		id: 1,

@@ -2,16 +2,16 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { BASE_URL_API, HEADER_API } from "../../../../config/urlApi";
 import Swal from "sweetalert2";
-import Table, { SelectColumnFilter, ActionButton } from '../../../../components/Table'
+import Table, {SelectColumnFilter, ActionButton} from '../../../../components/Table'
 import { AdminContext } from "../../../../contexts/AdminContext";
 import FormPage from "./FormPage";
 
-const CategoryPage = () => {
+const ItemPage = () => {
     const { openModal, isModalOpen, setOnDelete, contextData, onDelete } = useContext(AdminContext)
     const [data, setData] = useState()
 
     useEffect(() => {
-        axios.get(BASE_URL_API + 'categoryitems')
+        axios.get(BASE_URL_API + 'items')
             .then(function (response) {
                 console.log(response.data.data);
                 setData(response.data.data)
@@ -23,7 +23,7 @@ const CategoryPage = () => {
     }, [])
 
     useEffect(() => {
-        axios.get(BASE_URL_API + 'categoryitems')
+        axios.get(BASE_URL_API + 'items')
             .then(function (response) {
                 console.log(response.data.data);
                 setData(response.data.data)
@@ -42,7 +42,7 @@ const CategoryPage = () => {
 
     const handleDelete = () => {
         Swal.fire({
-            title: 'Delete Point',
+            title: 'Delete Item',
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
@@ -51,7 +51,7 @@ const CategoryPage = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(BASE_URL_API + 'categoryitems/' + contextData.id)
+                axios.delete(BASE_URL_API + 'items/' + contextData.id)
             .then(function (response) {
                 console.log(response.data);
                 Swal.fire({
@@ -72,21 +72,32 @@ const CategoryPage = () => {
             }
         })
     }
-
+    
     const columns = [
         {
-            Header: 'Nama Kategori',
-            accessor: "name",
-            Filter: SelectColumnFilter,  // new
-            filter: 'includes',  // new
+
+            Header: 'Nama Item',
+            accessor: 'name',
+        },
+        {
+            Header: 'Point Redeem',
+            accessor: 'pointRedeem',
+        },
+        {
+            Header: 'Stock',
+            accessor: 'stock'
+        },
+        {
+            Header: 'Kategori',
+            accessor: 'category.Name'
         },
         {
             Header: 'Created At',
-            accessor: "createdAt",
+            accessor: 'createdAt',
         },
         {
-            Header: 'Action',
-            accessor: "updatedAt",
+            Header: 'Updated At',
+            accessor: 'updatedAt',
         },
         {
             Header: 'Action',
@@ -96,28 +107,27 @@ const CategoryPage = () => {
 
     return (
         <div className="container mx-auto">
-            <button
+             <button
                 type="button"
                 onClick={() => openModal()}
                 className="w-1/8 border mt-10 rounded-xl px-5 py-2 bg-orange-500 font-sans text-white font-bold"
             >
-                Tambah Kategori
+                Tambah Item
             </button>
             <div className="grid grid-cols-4 gap-y-5 gap-x-5 sm:grid-cols-1 sm:gap-x-6 lg:grid-cols-1 xl:grid-cols-1 xl:gap-x-1 ">
                 <div className="mt-10 w-full aspect-w-0 aspect-h-0 flex justify-center">
                     <div className="basis-full px-5 xl:px-0">
-                        {isModalOpen ?
+                    {isModalOpen ?
                            <FormPage/>
                             : null
 
                         }
-                        {data ?
+                    {data ?
                             <Table
                                 columns={columns}
                                 data={data}
                             />
                             : "loading"}
-
                     </div>
                 </div>
             </div>
@@ -125,4 +135,4 @@ const CategoryPage = () => {
     )
 }
 
-export default CategoryPage;
+export default ItemPage;
