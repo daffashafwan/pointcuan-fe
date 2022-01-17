@@ -106,7 +106,7 @@ function LoginPage() {
                   className="w-full py-2 px-5 text-primary border border-gray-600 rounded-xl outline-none text-sm transition duration-150 ease-in-out mb-4"
                 />
               </div>
-              <div className="w-full flex py-2 px-5  text-primary border border-gray-600 rounded-xl outline-none text-sm transition duration-150 ease-in-out mb-4">
+              <div className="w-full flex  border border-gray-600 rounded-xl outline-none text-sm transition duration-150 ease-in-out mb-4 bg-white">
                 <input
                   id="password"
                   name="password"
@@ -116,16 +116,16 @@ function LoginPage() {
 
                   required
                   placeholder="Password"
-                  className="w-20 basis-full"
+                  className="w-20 basis-full py-2 px-5  text-primary rounded-xl border-hidden outline-none"
                 />
                 <div
-                  className=" inline basis-2 w-full justify-end h-fit"
+                  className=" inline basis-2 w-full justify-end align-middle "
                   onClick={handlerHidePass}
                 >
                   {hidePass == true ? (
-                    <AiFillEyeInvisible className="inline text-center" />
+                    <AiFillEyeInvisible className="inline text-center mx-2 mt-2 fill-gray-600" />
                   ) : (
-                    <AiFillEye className="inline text-center" />
+                    <AiFillEye className="inline text-center mx-2 mt-2 fill-gray-600" />
                   )}
                 </div>
               </div>

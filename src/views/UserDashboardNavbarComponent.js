@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import logo from "../assets/images/logo.svg";
 import { GiHamburgerMenu } from "react-icons/gi";
 import defaultPhoto from "../assets/images/photoProfil/default.jpeg";
+import { Link } from "react-router-dom";
 
 export const UserDashboardNavbarComponent = () => {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
@@ -15,7 +16,7 @@ export const UserDashboardNavbarComponent = () => {
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between container px-1 md:px-10">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <a
-              className="text-xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap  text-black"
+              className="text-2xl font-medium leading-relaxed inline-block mr-4 py-2 whitespace-nowrap  text-black"
               href="#pablo"
             >
               <img src={logo} className=" w-8 xl:w-10 mr-3 inline" />
@@ -37,31 +38,34 @@ export const UserDashboardNavbarComponent = () => {
           >
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
               <li className="nav-item">
-                <a
-                  className="px-3 py-2 flex items-center text-sm md:text-lg font-normal leading-snug text-black hover:opacity-75"
-                  href="#"
-                >
-                  <i className="fab fa-facebook-square text-lg  leading-lg text-black opacity-75"></i>
-                  <span className="ml-2">Beranda</span>
-                </a>
+                <Link to="/dashboard">
+                  <p className="px-3 py-2 flex items-center text-sm md:text-lg font-normal leading-snug text-black hover:opacity-75">
+                    <i className="fab fa-facebook-square text-lg  leading-lg text-black opacity-75"></i>
+                    <span className="ml-2">Beranda</span>
+                  </p>
+                </Link>
               </li>
               <li className="nav-item">
-                <a
-                  className="px-3 py-2 flex items-center text-sm md:text-lg font-normal leading-snug text-black hover:opacity-75"
-                  href="#"
-                >
-                  <i className="fab fa-twitter text-lg leading-lg text-black opacity-75"></i>
-                  <span className="ml-2">Catatan Transaksi</span>
-                </a>
+                <Link to="/riwayattransaksi">
+                  <p className="px-3 py-2 flex items-center text-sm md:text-lg font-normal leading-snug text-black hover:opacity-75">
+                    <i className="fab fa-twitter text-lg leading-lg text-black opacity-75"></i>
+                    <span className="ml-2">Catatan Transaksi</span>
+                  </p>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/riwayatredeem">
+                  <p className="px-3 py-2 flex items-center text-sm md:text-lg font-normal leading-snug text-black hover:opacity-75">
+                    <i className="fab fa-twitter text-lg leading-lg text-black opacity-75"></i>
+                    <span className="ml-2">Catatan Redeem</span>
+                  </p>
+                </Link>
               </li>
               <li className="nav-item" onClick={() => setAkunOpen(!akunOpen)}>
-                <a
-                  className="px-3 py-2 flex items-center text-sm md:text-lg font-normal leading-snug text-black hover:opacity-75"
-                  href="#"
-                >
+                <p className="px-3 py-2 flex items-center text-sm md:text-lg font-normal leading-snug text-black hover:opacity-75">
                   <i className="fab fa-pinterest text-lg leading-lg text-black opacity-75"></i>
                   <span className="ml-2">Akun</span>
-                </a>
+                </p>
               </li>
             </ul>
           </div>
@@ -72,7 +76,11 @@ export const UserDashboardNavbarComponent = () => {
               <div>
                 <div className="w-20 h-20 mx-2 mt-5 mb-2 text-center">
                   <img src={defaultPhoto} className="rounded rounded-full " />
-                  <p>Log Out</p>
+                  <Link to="/">
+                    <p className="cursor-pointer mt-5 hover:text-gray-400">
+                      Log Out
+                    </p>
+                  </Link>
                 </div>
               </div>
               <div className="pt-3 pr-5">

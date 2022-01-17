@@ -3,11 +3,13 @@ import LoginAdminPage from "./pages/adminPages/LoginAdminPage";
 import DashboardPage from "./pages/userPages/DashboardPage";
 import ForgetPasswordPage from "./pages/userPages/ForgetPasswordPage";
 import LoginPage from "./pages/userPages/LoginPage";
+import RedeemPage from "./pages/userPages/RedeemPage";
 import RegisterPage from "./pages/userPages/RegisterPage";
 import ResetPassword from "./pages/userPages/ResetPassword";
 import RiwayatRedeemPage from "./pages/userPages/RiwayatRedeemPage";
 import RiwayatTransaksiPage from "./pages/userPages/RiwayatTransaksiPage";
 import BasePage from "./pages/adminPages/BasePage";
+import VerificationSuccess from "./pages/userPages/VerificationUser";
 
 function App() {
   return (
@@ -19,7 +21,8 @@ function App() {
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/riwayattransaksi" element={<RiwayatTransaksiPage />} />
         <Route path="/riwayatredeem" element={<RiwayatRedeemPage />} />
-
+        <Route path="/verificationsuccess" element={<VerificationSuccess/>}/>
+        <Route path="/redeem/:categoryName" element={<RedeemPage />} />
         <Route path="/loginadmin" element={<LoginAdminPage />} />
         <Route
           path="/forgetpassword/resetpassword"
@@ -31,6 +34,7 @@ function App() {
           element={<BasePage />}
         />
       </Routes>
+      
     </div>
   );
 }
