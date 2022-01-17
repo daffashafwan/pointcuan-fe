@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { BASE_URL_API, HEADER_API } from "../../../../config/urlApi";
+import { BASE_URL_API, HEADER_API_ADMIN } from "../../../../config/urlApi";
 import Swal from "sweetalert2";
 import Table, {SelectColumnFilter, ActionButton} from '../../../../components/Table'
 import { AdminContext } from "../../../../contexts/AdminContext";

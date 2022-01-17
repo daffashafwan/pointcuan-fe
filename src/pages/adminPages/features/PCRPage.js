@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { BASE_URL_API, HEADER_API } from "../../../config/urlApi";
+import { BASE_URL_API, HEADER_API_ADMIN } from "../../../config/urlApi";
 import { AdminContext } from "../../../contexts/AdminContext";
 import Swal from "sweetalert2";
 
@@ -12,7 +12,8 @@ const PCRPage = () => {
     });
 
     useEffect(() => {
-        axios.get(BASE_URL_API + 'pcr')
+        console.log(HEADER_API_ADMIN)
+        axios.get(BASE_URL_API + 'pcr', HEADER_API_ADMIN)
             .then(function (response) {
                 setPoint(response.data.data.pcrValue)
                 console.log(response.data);

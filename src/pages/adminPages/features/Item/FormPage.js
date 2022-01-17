@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { AdminContext } from "../../../../contexts/AdminContext";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { BASE_URL_API, HEADER_API } from "../../../../config/urlApi";
+import { BASE_URL_API, HEADER_API_ADMIN } from "../../../../config/urlApi";
 import Select from "react-select";
 
 const FormPage = () => {
