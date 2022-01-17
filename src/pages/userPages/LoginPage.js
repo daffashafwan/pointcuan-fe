@@ -3,7 +3,7 @@ import logo from "../../assets/images/logo.svg";
 import VectorFront from "../../components/VectorFront";
 import LoginPageIm from "../../assets/images/loginPage/LoginPage.svg";
 import { useNavigate } from "react-router-dom";
-import { bake_cookies } from "sfcookies"
+import { bake_cookie } from "sfcookies"
 import { BASE_URL_API, HEADER_API } from "../../config/urlApi";
 import Swal from "sweetalert2";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
@@ -12,6 +12,7 @@ import axios from "axios";
 function LoginPage() {
   const navigate = useNavigate();
   const cookie_key = 'user_cred';
+  const jwt_user = 'jwt_user';
   const [hidePass, setHidePass] = useState(false);
 
   const handlerHidePass = () => {
@@ -36,7 +37,7 @@ function LoginPage() {
       address: formState.address,
     }
     axios.post(BASE_URL_API + 'users/login',
-      bodyFormData, HEADER_API)
+      bodyFormData)
       .then(function (response) {
         Swal.fire({
           position: 'top-end',
@@ -45,6 +46,8 @@ function LoginPage() {
           showConfirmButton: false,
           timer: 1200
         });
+        bake_cookie(cookie_key, response.data.data.id);
+        bake_cookie(jwt_user, response.data.data.jwtToken);
         setTimeout(function () {
           navigate('/dashboard');
         }, 1500)
