@@ -3,6 +3,7 @@ import { useTable, useGlobalFilter, useAsyncDebounce, useFilters, useSortBy, use
 import { ChevronDoubleLeftIcon, ChevronLeftIcon, ChevronRightIcon, ChevronDoubleRightIcon } from '@heroicons/react/solid'
 import { Button, PageButton } from "./Button"
 import { AdminContext } from "../contexts/AdminContext";
+import { classNames } from "../utils/Utils";
 
 export function ActionButton({ value, column, row }) {
     const {onEdit, setOnEdit, openModal, setContextData, onDelete, setOnDelete} = useContext(AdminContext)
@@ -38,6 +39,72 @@ export function ActionButton({ value, column, row }) {
         </div>
     );
 }
+
+export function ApprovalButton({ value, column, row }) {
+    const {onEdit, setOnEdit, openModal, setContextData, onDelete, setOnDelete, setApprove} = useContext(AdminContext)
+    return (
+        <div className="items-center mx-3">
+            <div className="grid grid-cols-2">
+                <div className="grid grid-rows-1">
+                    <button
+                        type="button"
+                        onClick={()=>{
+                            setContextData(row.original)
+                            setOnEdit(true)
+                            openModal()
+                        }}
+                        disabled={row.original.status === 0 ? false : true}
+                        className={classNames(
+                            "w-1/8 border rounded-xl px-5 mr-1 py-2",
+                            row.original.status === 0 ? "bg-orange-500 font-sans text-white font-bold" : "bg-gray-500 font-sans text-white font-bold"
+                          )}
+                    >
+                        Approve
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export function ViewButton({ value, column, row }) {
+    const {onEdit, setOnEdit, openModal, setContextData, onDelete, setOnDelete, setApprove} = useContext(AdminContext)
+    return (
+        <div className="items-center mx-3">
+            <div className="grid grid-cols-2">
+                <div className="grid grid-rows-1">
+                    <button
+                        type="button"
+                        onClick={()=>{
+                            setContextData(row.original)
+                            openModal()
+                        }}
+                        className="w-1/8 border rounded-xl px-5 mr-1 py-2 bg-orange-500 font-sans text-white font-bold"
+                    >
+                        View Point
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export function StatusPill({ value }) {
+    const status = value === 0 ? "Proses" : (value === 1 ? "Ditolak" : "Diterima");
+  
+    return (
+      <span
+        className={classNames(
+          "px-3 py-1 uppercase leading-wide font-bold text-xs rounded-full shadow-sm",
+          status.startsWith("Diterima") ? "bg-green-100 text-green-700" : null,
+          status.startsWith("Proses") ? "bg-yellow-100 text-yellow-700" : null,
+          status.startsWith("Ditolak") ? "bg-red-100 text-red-700" : null
+        )}
+      >
+        {status}
+      </span>
+    );
+  }
 
 export function SelectColumnFilter({
     column: { filterValue, setFilter, preFilteredRows, id },

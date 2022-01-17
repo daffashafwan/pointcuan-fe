@@ -1,8 +1,8 @@
 import { CameraIcon } from '@heroicons/react/solid'
 import PCRPage from '../pages/adminPages/features/PCRPage';
-import TransactionPage from '../pages/adminPages/features/TransactionPage';
+import TransactionPage from '../pages/adminPages/features/Transaction/TransactionPage';
 import CategoryPage from '../pages/adminPages/features/Category/CategoryPage';
-import UserPage from '../pages/adminPages/features/UserPage';
+import UserPage from '../pages/adminPages/features/User/UserPage';
 import RedeemPage from '../pages/adminPages/features/RedeemPage';
 import ItemPage from '../pages/adminPages/features/Item/ItemPage';
 export const links = [
