@@ -10,7 +10,7 @@ import UserDashboardNavbarComponent from "../../views/UserDashboardNavbarCompone
 import UserFooterComponent from "../../views/UserFooterComponent";
 import Swal from "sweetalert2";
 import { storage } from "../../config/firebase";
-import { ref, uploadBytesResumable, getDownloadURL } from "@firebase/storage";
+import { ref, uploadBytesResumable } from "@firebase/storage";
 
 function DashboardPage() {
   const percentage = 40;
@@ -24,7 +24,6 @@ function DashboardPage() {
     const tanggalTransaksi = e.target[1].value;
     const file = e.target[2].files[0];
     uploadFiles(file);
-
     setTambahPoint(false);
     Swal.fire({
       icon: "success",
