@@ -1,4 +1,5 @@
 import React from "react";
+import firebase from 'firebase/app'
 import iconAddPoint from "../assets/images/iconAddPoint.svg";
 import { MdOutlineAddCircle } from "react-icons/md";
 import withReactContent from "sweetalert2-react-content";
