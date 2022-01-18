@@ -6,14 +6,19 @@ import Swal from "sweetalert2";
 
 const MySwal = withReactContent(Swal);
 
-function DashboardPointComponent() {
+function DashboardPointComponent({
+  handlerFormTransaksi,
+  tanggalTransaksi,
+  setTanggalTransaksi,
+}) {
   const handlerTambahPoint = () => {
     MySwal.fire({
       title: <strong className="">Dapatkan Point</strong>,
       html: (
         <form
           action="/action_page.php"
-          className="text-left text-black font-semibold mx-1 md:mx-5 mt-10 mb-10"
+          className="text-left text-black font-semibold mx-1 md:mx-5 mt-10 mb-0"
+          onSubmit={handlerFormTransaksi}
         >
           <label for="totalPenjualan">Total Penjualan</label>
           <br />
@@ -39,14 +44,23 @@ function DashboardPointComponent() {
             name="buktiGambar"
             className="text-orange-500 mt-4"
           />
+          <div className="grid grid-cols-1 justify-items-center mt-5">
+            <button
+              type="submit"
+              className="bg-orange-500 px-5 py-2 text-white rounded-md"
+              onClick={`Confirmed: true`}
+            >
+              Kirim
+            </button>
+          </div>
         </form>
       ),
-      confirmButtonColor: "rgb(249 115 22)",
-      cancelButtonColor: "rgb(168 162 158)",
-      cancelButtonText: "Batal",
-      confirmButtonText: "Kirim",
-      showCloseButton: true,
-      showCancelButton: true,
+
+      confirmButtonColor: "rgb(168 162 158)",
+
+      confirmButtonText: "batal",
+      confirmButtonText: '<i class="fa fa-thumbs-up" type="submit"></i> Great!',
+      showButton: false,
     });
   };
   return (
