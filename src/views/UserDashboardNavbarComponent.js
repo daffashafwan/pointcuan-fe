@@ -12,7 +12,7 @@ export const UserDashboardNavbarComponent = () => {
 
   return (
     <div>
-      <nav className="fixed z-50 flex flex-wrap w-screen items-center justify-between px-2 py-1 top-0 bg-white fill-black mb-3 border border-2 border-b-gray-200 ">
+      <nav className="fixed z-20 flex flex-wrap w-screen items-center justify-between px-2 py-1 top-0 bg-white fill-black mb-3 border border-2 border-b-gray-200 ">
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between container px-1 md:px-10">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <a
