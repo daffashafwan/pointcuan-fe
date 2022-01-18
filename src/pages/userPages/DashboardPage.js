@@ -29,6 +29,7 @@ function DashboardPage() {
       icon: "success",
       title: "Sukses",
       text: "anda berhasil mengirimkan transaksi",
+      confirmButtonColor: "rgb(249 115 22)",
     });
   };
 
@@ -116,6 +117,7 @@ function DashboardPage() {
         </div>
       ) : null}
 
+      {/* isis */}
       <div className="flex-grow">
         <div className="container mx-auto pt-11">
           {/* sisi kiri */}
@@ -124,10 +126,7 @@ function DashboardPage() {
             <div className="grid grid-cols-1 ">
               <div className="flex justify-between   gap-x-3 sm:gap-x-3 md:gap-x-3  lg:gap-x-0 xl:gap-x-0 mt-10 mx-2">
                 <div className="flex justify-center basis-1/2 ml-3">
-                  <DashboardPointComponent
-                    handlerFormTransaksi={handlerFormTransaksi}
-                    setTambahPoint={setTambahPoint}
-                  />
+                  <DashboardPointComponent setTambahPoint={setTambahPoint} />
                 </div>
                 <div className="flex justify-center basis-1/2 mr-3">
                   <DashboardPointViewComponent percentage={percentage} />

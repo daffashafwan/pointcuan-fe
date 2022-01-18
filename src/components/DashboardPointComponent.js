@@ -6,64 +6,7 @@ import Swal from "sweetalert2";
 
 const MySwal = withReactContent(Swal);
 
-function DashboardPointComponent({
-  handlerFormTransaksi,
-  tanggalTransaksi,
-  setTanggalTransaksi,
-  setTambahPoint,
-}) {
-  // const handlerTambahPoint = () => {
-  //   MySwal.fire({
-  //     title: <strong className="">Dapatkan Point</strong>,
-  //     html: (
-  // <form
-  //   action="/action_page.php"
-  //   className="text-left text-black font-semibold mx-1 md:mx-5 mt-10 mb-0"
-  //   onSubmit={handlerFormTransaksi}
-  // >
-  //   <label for="totalPenjualan">Total Penjualan</label>
-  //   <br />
-  //   <input
-  //     type="number"
-  //     id="totalPenjualan"
-  //     name="totalPenjualan"
-  //     className="border border-black w-full py-2 px-4 rounded-md my-3"
-  //   />
-  //   <br />
-  //   <label for="tanggal">Tanggal</label>
-  //   <br />
-  //   <input
-  //     type="date"
-  //     id="tanggal"
-  //     name="tanggal"
-  //     className="border border-black w-full py-2 px-4 rounded-md my-3"
-  //   />
-  //   <br />
-  //   <input
-  //     type="file"
-  //     id="buktiGambar"
-  //     name="buktiGambar"
-  //     className="text-orange-500 mt-4"
-  //   />
-  //   <div className="grid grid-cols-1 justify-items-center mt-5">
-  //     <button
-  //       type="submit"
-  //       className="bg-orange-500 px-5 py-2 text-white rounded-md"
-  //       onClick={`Confirmed: true`}
-  //     >
-  //       Kirim
-  //     </button>
-  //   </div>
-  // </form>
-  //     ),
-
-  //     confirmButtonColor: "rgb(168 162 158)",
-
-  //     confirmButtonText: "batal",
-  //     confirmButtonText: '<i class="fa fa-thumbs-up" type="submit"></i> Great!',
-  //     showButton: false,
-  //   });
-  // };
+function DashboardPointComponent({ setTambahPoint }) {
   return (
     <div className=" grid grid-cols-1 justify-items-center bg-white p-10 rounded-3xl drop-shadow-xl 4/5 md:w-full md:mx-8">
       <p className="text-center text-sm lg:text-md">Point Anda</p>
