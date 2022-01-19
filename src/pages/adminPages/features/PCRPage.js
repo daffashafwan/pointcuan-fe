@@ -3,6 +3,7 @@ import axios from "axios";
 import { BASE_URL_API, HEADER_API_ADMIN } from "../../../config/urlApi";
 import { AdminContext } from "../../../contexts/AdminContext";
 import Swal from "sweetalert2";
+import { read_cookie } from 'sfcookies';
 
 const PCRPage = () => {
     const { menu } = useContext(AdminContext)
