@@ -10,7 +10,7 @@ import UserDashboardNavbarComponent from "../../views/UserDashboardNavbarCompone
 import UserFooterComponent from "../../views/UserFooterComponent";
 import Swal from "sweetalert2";
 import { storage } from "../../config/firebase";
-import { ref, uploadBytesResumable } from "@firebase/storage";
+import { ref, uploadBytesResumable, getDownloadURL } from "@firebase/storage";
 
 function DashboardPage() {
   const percentage = 40;
@@ -39,12 +39,21 @@ function DashboardPage() {
     const storageRef = ref(storage, `/bukti/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
-    uploadTask.on("state_changed", (snapshot) => {
-      const prog = Math.round(
-        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-      );
-      setLoadingUpload(prog);
-    });
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const prog = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setLoadingUpload(prog);
+      },
+      (err) => console.log(err),
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+          console.log(url);
+        });
+      }
+    );
   };
 
   return (

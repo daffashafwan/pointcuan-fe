@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function DashboardRiwayatRedeem() {
   return (
-    <div lassName=" grid  grid-cols-1">
+    <div className=" grid  grid-cols-1">
       <div className="grid grid-cols-1 place-content-center  bg-white py-10 px-6 md:p-10 rounded-3xl drop-shadow-xl w-100 mt-5 mx-10">
         <div className="grid grid-cols-1 md:grid-cols-2  pt-5">
           <div>
@@ -20,7 +20,7 @@ function DashboardRiwayatRedeem() {
           </div>
         </div>
         <div className="grid grid-cols-1 pb-10 md:pb-20">
-          <table class="table-auto text-xs md:text-sm text-left">
+          <table className="table-auto text-xs md:text-sm text-left">
             <thead>
               <tr>
                 <th>Tanggal Teransaksi</th>

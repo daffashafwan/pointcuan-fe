@@ -156,7 +156,7 @@ const FormPage = () => {
                                 type="text"
                                 value={formState.name}
                                 onChange={set('name')}
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 placeholder="Nama Item"
                             />
                         </div>
@@ -165,7 +165,7 @@ const FormPage = () => {
                                 type="number"
                                 value={formState.pointRedeem}
                                 onChange={set('pointRedeem')}
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 placeholder="Point Item"
                             />
                         </div>
@@ -174,7 +174,7 @@ const FormPage = () => {
                                 type="text"
                                 value={formState.stock}
                                 onChange={set('stock')}
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 placeholder="Jumlah Stock"
                             />
                         </div>
