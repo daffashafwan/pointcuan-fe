@@ -6,7 +6,7 @@ function TableRiwayatTransaksi({ statusTransaksi }) {
     <div className="border border-gray-400 p-2 md:p-10 mt-10 mx-2 md:mx-10 rounded rounded-xl">
       {/* Proses */}
       {statusTransaksi == 0 ? (
-        <table class="table-auto w-full text-center md:text-left text-xs md:text-base">
+        <table className="table-auto w-full text-center md:text-left text-xs md:text-base">
           <thead>
             <tr>
               <th>No</th>
@@ -46,7 +46,7 @@ function TableRiwayatTransaksi({ statusTransaksi }) {
       )}
       {/* Ditolakj */}
       {statusTransaksi == 1 ? (
-        <table class="table-auto w-full text-center md:text-left text-xs md:text-base">
+        <table className="table-auto w-full text-center md:text-left text-xs md:text-base">
           <thead>
             <tr>
               <th>No</th>
@@ -82,7 +82,7 @@ function TableRiwayatTransaksi({ statusTransaksi }) {
       )}
       {/* Diterima */}
       {statusTransaksi == 2 ? (
-        <table class="table-auto w-full text-center md:text-left text-xs md:text-base">
+        <table className="table-auto w-full text-center md:text-left text-xs md:text-base">
           <thead>
             <tr>
               <th>No</th>

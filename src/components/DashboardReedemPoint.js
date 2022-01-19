@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 function DashboardReedemPoint() {
   return (
-    <div lassName=" grid  grid-cols-1 w-full ">
+    <div className=" grid  grid-cols-1 w-full ">
       <div className="grid grid-cols-1 w-5/5 place-content-center bg-white p-10 rounded-3xl drop-shadow-xl w-100 mt-5 mx-10">
         <div className="grid grid-cols-1 ">
           <p className="font-bold mb-5  md:pl-5 text-center md:text-left">
