@@ -8,7 +8,7 @@ const FormPage = () => {
     const [data, setData] = useState()
     const { contextData, onEdit, setOnEdit, closeModal, openModal, isModalOpen } = useContext(AdminContext)
     useEffect(() => {
-        axios.get(BASE_URL_API + 'users/'+contextData.id+"")
+        axios.get(BASE_URL_API + 'users/'+contextData.id+"", HEADER_API_ADMIN)
             .then(function (response) {
                 setData(response.data.data)
                 console.log(response.data.data);

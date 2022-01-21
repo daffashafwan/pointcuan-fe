@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { BASE_URL_API, HEADER_API_ADMIN } from "../../../../config/urlApi";
 import Swal from "sweetalert2";
-import Table, { SelectColumnFilter, ActionButton } from '../../../../components/Table'
+import Table, { SelectColumnFilter, ActionButton, DateRenderer } from '../../../../components/Table'
 import { AdminContext } from "../../../../contexts/AdminContext";
 import FormPage from "./FormPage";
 
@@ -11,7 +11,7 @@ const CategoryPage = () => {
     const [data, setData] = useState()
 
     useEffect(() => {
-        axios.get(BASE_URL_API + 'categoryitems')
+        axios.get(BASE_URL_API + 'categoryitems', HEADER_API_ADMIN)
             .then(function (response) {
                 console.log(response.data.data);
                 setData(response.data.data)
@@ -23,7 +23,7 @@ const CategoryPage = () => {
     }, [])
 
     useEffect(() => {
-        axios.get(BASE_URL_API + 'categoryitems')
+        axios.get(BASE_URL_API + 'categoryitems', HEADER_API_ADMIN)
             .then(function (response) {
                 console.log(response.data.data);
                 setData(response.data.data)
@@ -51,7 +51,7 @@ const CategoryPage = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(BASE_URL_API + 'categoryitems/' + contextData.id)
+                axios.delete(BASE_URL_API + 'categoryitems/' + contextData.id, HEADER_API_ADMIN )
             .then(function (response) {
                 console.log(response.data);
                 Swal.fire({
@@ -83,10 +83,12 @@ const CategoryPage = () => {
         {
             Header: 'Created At',
             accessor: "createdAt",
+            Cell: DateRenderer
         },
         {
             Header: 'Action',
             accessor: "updatedAt",
+            Cell: DateRenderer
         },
         {
             Header: 'Action',

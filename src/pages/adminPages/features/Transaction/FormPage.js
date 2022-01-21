@@ -8,7 +8,7 @@ const FormPage = () => {
     const [data, setData] = useState()
     const { contextData, onEdit, setOnEdit, closeModal, openModal, isModalOpen } = useContext(AdminContext)
     useEffect(() => {
-        axios.get(BASE_URL_API + 'categoryitems')
+        axios.get(BASE_URL_API + 'categoryitems', HEADER_API_ADMIN)
             .then(function (response) {
                 setData(response.data.data)
                 //console.log(response.data.data);
@@ -20,12 +20,14 @@ const FormPage = () => {
 
     const [formState, setFormState] = useState({
         description: "",
+        url: ""
     });
 
     useEffect(() => {
         if (onEdit) {
             setFormState({
                 description: contextData.description,
+                url: contextData.transactionAttachment
             })
         }
     }, [onEdit])
@@ -49,7 +51,7 @@ const FormPage = () => {
                 status: isApprove ? 2 : 1
             }
             console.log(bodyFormData)
-            axios.put(BASE_URL_API + 'transaction/' + contextData.id, bodyFormData)
+            axios.put(BASE_URL_API + 'transaction/' + contextData.id, bodyFormData,HEADER_API_ADMIN)
                 .then(function (response) {
                     console.log(response.data);
                     Swal.fire({
@@ -102,7 +104,7 @@ const FormPage = () => {
                         </div>
                         {/*body*/}
                         <div className="relative p-6 flex-auto">
-                            <img src="https://lh5.googleusercontent.com/44xjYt5EHFXELHp3Txw1OaxxHd7mVsxRB0kLgOkDlpVkX5fb5g0n2URRRU6Lcb4mimdzlCuxhZ6DPeCJxTg9GqEI7rnqJSazco80_h6wNjvcCxnL7Ek-hiQoa5ls5SdcAcmYHlEq=s0" />
+                            <img src={formState.url} />
                         </div>
                         <div className="relative p-6 flex-auto">
                             <input

@@ -29,7 +29,7 @@ const FormPage = () => {
             }
             console.log(bodyFormData)
             console.log(contextData.id)
-            axios.put(BASE_URL_API + 'categoryitems/' + contextData.id, bodyFormData)
+            axios.put(BASE_URL_API + 'categoryitems/' + contextData.id, bodyFormData, HEADER_API_ADMIN)
                 .then(function (response) {
                     console.log(response.data);
                     Swal.fire({
@@ -65,7 +65,7 @@ const FormPage = () => {
                 category: formState.category,
             }
             console.log(bodyFormData)
-            axios.post(BASE_URL_API + 'categoryitems', bodyFormData)
+            axios.post(BASE_URL_API + 'categoryitems', bodyFormData, HEADER_API_ADMIN)
                 .then(function (response) {
                     console.log(response.data);
                     Swal.fire({

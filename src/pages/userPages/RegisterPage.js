@@ -7,6 +7,7 @@ import LoginPageIm from "../../assets/images/loginPage/LoginPage.svg";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { read_cookie, delete_cookie } from 'sfcookies';
 
 function RegisterPage() {
   const navigate = useNavigate();
