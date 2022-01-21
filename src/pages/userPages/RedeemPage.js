@@ -1,12 +1,20 @@
-import React from "react";
+import React,{useEffect} from "react";
 import UserDashboardNavbarComponent from "../../views/UserDashboardNavbarComponent";
 import UserFooterComponent from "../../views/UserFooterComponent";
 
 import { useParams } from "react-router-dom";
 import RedeemNavigasiComponent from "../../components/RedeemNavigasiComponent";
 import RedeemDaftarComponent from "../../components/RedeemDaftarComponent";
+import { useNavigate } from "react-router-dom";
+import { read_cookie, delete_cookie } from 'sfcookies';
 
 function RedeemPage() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (read_cookie('user_cred').length < 1) {
+      navigate('/');
+    }
+  })
   const params = useParams();
   const category = params.categoryName;
 

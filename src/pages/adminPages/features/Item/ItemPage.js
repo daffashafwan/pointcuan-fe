@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { BASE_URL_API, HEADER_API_ADMIN } from "../../../../config/urlApi";
 import Swal from "sweetalert2";
-import Table, {SelectColumnFilter, ActionButton} from '../../../../components/Table'
+import Table, {SelectColumnFilter, ActionButton, DateRenderer} from '../../../../components/Table'
 import { AdminContext } from "../../../../contexts/AdminContext";
 import FormPage from "./FormPage";
 
@@ -11,7 +11,7 @@ const ItemPage = () => {
     const [data, setData] = useState()
 
     useEffect(() => {
-        axios.get(BASE_URL_API + 'items')
+        axios.get(BASE_URL_API + 'items', HEADER_API_ADMIN)
             .then(function (response) {
                 console.log(response.data.data);
                 setData(response.data.data)
@@ -94,10 +94,12 @@ const ItemPage = () => {
         {
             Header: 'Created At',
             accessor: 'createdAt',
+            Cell: DateRenderer
         },
         {
             Header: 'Updated At',
             accessor: 'updatedAt',
+            Cell: DateRenderer
         },
         {
             Header: 'Action',

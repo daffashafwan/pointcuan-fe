@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { BASE_URL_API, HEADER_API_ADMIN } from "../../../../config/urlApi";
 import Swal from "sweetalert2";
-import Table, { SelectColumnFilter, ApprovalButton, StatusPill } from '../../../../components/Table'
+import Table, { SelectColumnFilter, ApprovalButton, StatusPill, DateRenderer } from '../../../../components/Table'
 import { AdminContext } from "../../../../contexts/AdminContext";
 import FormPage from "./FormPage";
 
@@ -14,7 +14,7 @@ const TransactionPage = () => {
     });
 
     useEffect(() => {
-        axios.get(BASE_URL_API + 'transaction')
+        axios.get(BASE_URL_API + 'transaction', HEADER_API_ADMIN)
             .then(function (response) {
                 setData(response.data.data)
                 //console.log(response.data.data);
@@ -22,10 +22,10 @@ const TransactionPage = () => {
             .catch(function (error) {
                 console.log(error.response);
             });
-    }, [])
+    },[])
 
     useEffect(() => {
-        axios.get(BASE_URL_API + 'transaction')
+        axios.get(BASE_URL_API + 'transaction', HEADER_API_ADMIN)
             .then(function (response) {
                 setData(response.data.data)
                 //console.log(response.data.data);
@@ -47,14 +47,11 @@ const TransactionPage = () => {
         {
             Header: 'Date',
             accessor: 'transactionDate',
+            Cell: DateRenderer
         },
         {
             Header: 'Point',
             accessor: 'point',
-        },
-        {
-            Header: 'Attachment',
-            accessor: 'transactionAttachment',
         },
         {
             Header: 'Description',
