@@ -10,6 +10,7 @@ import RiwayatRedeemPage from "./pages/userPages/RiwayatRedeemPage";
 import RiwayatTransaksiPage from "./pages/userPages/RiwayatTransaksiPage";
 import BasePage from "./pages/adminPages/BasePage";
 import VerificationSuccess from "./pages/userPages/VerificationUser";
+import FaqPage from "./pages/userPages/FAQ/FaqPage";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/riwayatredeem" element={<RiwayatRedeemPage />} />
         <Route path="/verificationsuccess" element={<VerificationSuccess/>}/>
         <Route path="/redeem/:categoryName" element={<RedeemPage />} />
+        <Route path="/faq" element={<FaqPage />} />
         <Route path="/loginadmin" element={<LoginAdminPage />} />
         <Route
           path="/forgetpassword/resetpassword"
