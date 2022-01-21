@@ -10,7 +10,7 @@ import RiwayatRedeemPage from "./pages/userPages/RiwayatRedeemPage";
 import RiwayatTransaksiPage from "./pages/userPages/RiwayatTransaksiPage";
 import BasePage from "./pages/adminPages/BasePage";
 import VerificationSuccess from "./pages/userPages/VerificationUser";
-import FaqPage from "./pages/userPages/FaqPage";
+import FaqPage from "./pages/userPages/FAQ/FaqPage";
 
 function App() {
   return (
