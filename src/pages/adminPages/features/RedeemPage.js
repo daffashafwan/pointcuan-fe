@@ -25,24 +25,16 @@ const RedeemPage = () => {
 
     const columns = [
         {
-            Header: 'Nama User',
-            accessor: 'name',
+            Header: 'Item Redeem',
+            accessor: 'item.Name',
         },
         {
-            Header: 'Username',
-            accessor: 'username',
+            Header: 'Data Redeem',
+            accessor: 'dataRedeem',
         },
         {
             Header: 'Point',
             accessor: 'point',
-        },
-        {
-            Header: 'Email',
-            accessor: 'email',
-        },
-        {
-            Header: 'Alamat',
-            accessor: 'address',
         },
     ];
 

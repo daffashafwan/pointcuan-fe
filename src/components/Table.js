@@ -107,6 +107,21 @@ export function StatusPill({ value }) {
     );
 }
 
+export function StatusPill2({ value }) {
+    const status = value == 0 ? "Tidak Aktif" : "Aktif";
+    return (
+        <span
+            className={classNames(
+                "px-3 py-1 uppercase leading-wide font-bold text-xs rounded-full shadow-sm",
+                status.startsWith("Aktif") ? "bg-green-100 text-green-700" : null,
+                status.startsWith("Tidak Aktif") ? "bg-red-100 text-red-700" : null
+            )}
+        >
+            {status}
+        </span>
+    );
+}
+
 export function DateRenderer({ value }) {
     var date = new DateObject(value);
     console.log(date)

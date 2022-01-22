@@ -5,6 +5,8 @@ import CategoryPage from '../pages/adminPages/features/Category/CategoryPage';
 import UserPage from '../pages/adminPages/features/User/UserPage';
 import RedeemPage from '../pages/adminPages/features/RedeemPage';
 import ItemPage from '../pages/adminPages/features/Item/ItemPage';
+import FAQPage from '../pages/adminPages/features/FAQ/FAQPage';
+
 export const links = [
 	{
 		id: 1,
@@ -47,5 +49,12 @@ export const links = [
 		text: 'Category',
 		icon: <CameraIcon className="w-5 h-5" />,
 		components: <CategoryPage />
+	},
+	{
+		id: 7,
+		url: '/sidebar',
+		text: 'FAQ',
+		icon: <CameraIcon className="w-5 h-5" />,
+		components: <FAQPage />
 	},
 ];
