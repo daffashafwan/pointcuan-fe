@@ -2,7 +2,7 @@ import { read_cookie } from 'sfcookies';
 
 export var HEADER_API_ADMIN = {
     headers: {
-        //'Access-Control-Allow-Origin' : '*',
+        'Access-Control-Allow-Origin' : '*',
         'Content-Type' : 'application/json',
         //'Access-Control-Allow-Credentials' : 'true',
         'Access-Control-Allow-Headers': '*',
@@ -13,7 +13,7 @@ export var HEADER_API_ADMIN = {
 
 export var HEADER_API = {
     headers: {
-        //'Access-Control-Allow-Origin' : '*',
+        'Access-Control-Allow-Origin' : '*',
         'Content-Type' : 'application/json',
         //'Access-Control-Allow-Credentials' : 'true',
         'Access-Control-Allow-Headers': '*',
