@@ -13,11 +13,15 @@ import RedeemItem from "./RedeemItem";
 
 function RedeemDaftarComponent({ category }) {
   const { openModal, isModalOpen, closeModal, contextData, setContextData } = useContext(RedeemContext)
-  console.log("woi")
-  console.log(category)
+  const [dataSearch, setDataSearch] = useState({
+    data: ""
+  })
+  const [filteredData, setFilteredData] = useState()
   const [choosed, setChoosed] = useState()
   const [data, setData] = useState()
   useEffect(() => {
+    console.log("tes")
+    console.log(isModalOpen)
     setData()
     setChoosed()
     axios.get(BASE_URL_API + read_cookie('user_cred') + "/items/category/" + category, HEADER_API)
@@ -28,11 +32,28 @@ function RedeemDaftarComponent({ category }) {
       .catch(function (error) {
         console.log(error.response);
       });
-  }, [category])
+  }, [category, isModalOpen])
+
+  useEffect(() => {
+    var temp = []
+    data?.map(function (x) {
+      if (x.name.includes(dataSearch.data)) {
+        temp.push(x)
+      }
+    })
+    setFilteredData(temp)
+    console.log(filteredData)
+  }, [dataSearch])
 
   const handleChoosed = (x) => {
     setChoosed(x)
   }
+
+  const set = name => {
+    return ({ target: { value } }) => {
+      setDataSearch(oldValues => ({ ...oldValues, [name]: value }));
+    }
+  };
 
   const handlerBeli = (choosed) => {
     console.log("tumbas")
@@ -55,13 +76,18 @@ function RedeemDaftarComponent({ category }) {
       <div className="grid grid-cols-1  w-full">
         <div className="py-0 my-0">
           <p className="font-bold text-base text-center mt-3 md:mt-0 md:text-left md:text-2xl">
-            Reedem Pulsa
+            Reedem Item
           </p>
         </div>
         <div className="grid grid-cols-1 w-full">
-          <p className="text-sm text-gray-600 mt-2">Nama Operator</p>
+          <p className="text-sm text-gray-600 mt-2">Nama Item</p>
           <div className="mt-2">
-            <input className="w-full border border-orange-500 text-base px-4 py-1 outline-none rounded-xl" />
+            <input
+              value={dataSearch.data}
+              onChange={
+                set('data')
+              }
+              className="w-full border border-orange-500 text-base px-4 py-1 outline-none rounded-xl" />
           </div>
         </div>
         <div className="grid grid-cols-1 w-full">
@@ -80,10 +106,11 @@ function RedeemDaftarComponent({ category }) {
                   <button disabled={x.stock === "0" ? "disabled" : null} onClick={() => handleChoosed(x)}>
                     <div className={classNames(
                       "font-semibold border-2",
-                      choosed ? (choosed.id === x.id ? "bg-orange-500 text-white text-center py-2 rounded-xl hover:border-orange-300" : (x.stock === "0" ? "bg-gray-200 text-center py-2 rounded-xl text-black hover:border-orange-300" : "bg-white-500 text-center py-2 rounded-xl text-black hover:border-orange-300" )) : (x.stock === "0" ? "bg-gray-200 text-center py-2 rounded-xl text-black hover:border-orange-300" : "bg-white-500 text-center py-2 rounded-xl text-black hover:border-orange-300" )
+                      choosed ? (choosed.id === x.id ? "bg-orange-500 text-white text-center py-2 rounded-xl hover:border-orange-300" : (x.stock === "0" ? "bg-gray-200 text-center py-2 rounded-xl text-black hover:border-orange-300" : "bg-white-500 text-center py-2 rounded-xl text-black hover:border-orange-300")) : (x.stock === "0" ? "bg-gray-200 text-center py-2 rounded-xl text-black hover:border-orange-300" : "bg-white-500 text-center py-2 rounded-xl text-black hover:border-orange-300")
                     )}>
                       <p>{x.name}</p>
                       <p>{x.pointRedeem} Point</p>
+                      <p>{x.stock} tersisa</p>
                     </div>
                   </button>
                 )
