@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { BASE_URL_API, HEADER_API } from "../../../config/urlApi";
+import { BASE_URL_API, HEADER_API_ADMIN } from "../../../config/urlApi";
 import Swal from "sweetalert2";
 import Table, {SelectColumnFilter} from '../../../components/Table'
 
@@ -12,7 +12,7 @@ const RedeemPage = () => {
     });
 
     useEffect(() => {
-        axios.get(BASE_URL_API + 'redeem')
+        axios.get(BASE_URL_API + 'redeem', HEADER_API_ADMIN)
             .then(function (response) {
                 console.log(response.data.data);
                 setData(response.data.data)
@@ -25,24 +25,16 @@ const RedeemPage = () => {
 
     const columns = [
         {
-            Header: 'Nama User',
-            accessor: 'name',
+            Header: 'Item Redeem',
+            accessor: 'item.Name',
         },
         {
-            Header: 'Username',
-            accessor: 'username',
+            Header: 'Data Redeem',
+            accessor: 'dataRedeem',
         },
         {
             Header: 'Point',
             accessor: 'point',
-        },
-        {
-            Header: 'Email',
-            accessor: 'email',
-        },
-        {
-            Header: 'Alamat',
-            accessor: 'address',
         },
     ];
 

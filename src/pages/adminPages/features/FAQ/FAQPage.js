@@ -2,16 +2,16 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { BASE_URL_API, HEADER_API_ADMIN } from "../../../../config/urlApi";
 import Swal from "sweetalert2";
-import Table, { SelectColumnFilter, ActionButton, DateRenderer } from '../../../../components/Table'
+import Table, { StatusPill2, ActionButton, DateRenderer } from '../../../../components/Table'
 import { AdminContext } from "../../../../contexts/AdminContext";
 import FormPage from "./FormPage";
 
-const CategoryPage = () => {
+const FAQPage = () => {
     const { openModal, isModalOpen, setOnDelete, contextData, onDelete } = useContext(AdminContext)
     const [data, setData] = useState()
 
     useEffect(() => {
-        axios.get(BASE_URL_API + 'categoryitems', HEADER_API_ADMIN)
+        axios.get(BASE_URL_API + 'faq', HEADER_API_ADMIN)
             .then(function (response) {
                 console.log(response.data.data);
                 setData(response.data.data)
@@ -23,7 +23,7 @@ const CategoryPage = () => {
     }, [])
 
     useEffect(() => {
-        axios.get(BASE_URL_API + 'categoryitems', HEADER_API_ADMIN)
+        axios.get(BASE_URL_API + 'faq', HEADER_API_ADMIN)
             .then(function (response) {
                 console.log(response.data.data);
                 setData(response.data.data)
@@ -42,7 +42,7 @@ const CategoryPage = () => {
 
     const handleDelete = () => {
         Swal.fire({
-            title: 'Delete Point',
+            title: 'Delete FAQ',
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
@@ -51,7 +51,7 @@ const CategoryPage = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(BASE_URL_API + 'categoryitems/' + contextData.id, HEADER_API_ADMIN )
+                axios.delete(BASE_URL_API + 'faq/' + contextData.id, HEADER_API_ADMIN )
             .then(function (response) {
                 console.log(response.data);
                 Swal.fire({
@@ -75,10 +75,17 @@ const CategoryPage = () => {
 
     const columns = [
         {
-            Header: 'Nama Kategori',
-            accessor: "name",
-            Filter: SelectColumnFilter,  // new
-            filter: 'includes',  // new
+            Header: 'Pertanyaan',
+            accessor: "question",
+        },
+        {
+            Header: 'Jawaban',
+            accessor: "answer",
+        },
+        {
+            Header: 'Status',
+            accessor: "status",
+            Cell: StatusPill2
         },
         {
             Header: 'Created At',
@@ -103,7 +110,7 @@ const CategoryPage = () => {
                 onClick={() => openModal()}
                 className="w-1/8 border mt-10 rounded-xl px-5 py-2 bg-orange-500 font-sans text-white font-bold"
             >
-                Tambah Kategori
+                Tambah FAQ
             </button>
             <div className="grid grid-cols-4 gap-y-5 gap-x-5 sm:grid-cols-1 sm:gap-x-6 lg:grid-cols-1 xl:grid-cols-1 xl:gap-x-1 ">
                 <div className="mt-10 w-full aspect-w-0 aspect-h-0 flex justify-center">
@@ -127,4 +134,4 @@ const CategoryPage = () => {
     )
 }
 
-export default CategoryPage;
+export default FAQPage;

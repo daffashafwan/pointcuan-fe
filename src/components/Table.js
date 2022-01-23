@@ -1,19 +1,20 @@
-import React,{useContext} from "react";
+import React, { useContext } from "react";
 import { useTable, useGlobalFilter, useAsyncDebounce, useFilters, useSortBy, usePagination } from "react-table";
 import { ChevronDoubleLeftIcon, ChevronLeftIcon, ChevronRightIcon, ChevronDoubleRightIcon } from '@heroicons/react/solid'
 import { Button, PageButton } from "./Button"
 import { AdminContext } from "../contexts/AdminContext";
 import { classNames } from "../utils/Utils";
+import DateObject from "react-date-object";
 
 export function ActionButton({ value, column, row }) {
-    const {onEdit, setOnEdit, openModal, setContextData, onDelete, setOnDelete} = useContext(AdminContext)
+    const { onEdit, setOnEdit, openModal, setContextData, onDelete, setOnDelete } = useContext(AdminContext)
     return (
         <div className="items-center mx-3">
             <div className="grid grid-cols-2">
                 <div className="grid grid-rows-1">
                     <button
                         type="button"
-                        onClick={()=>{
+                        onClick={() => {
                             setContextData(row.original)
                             setOnEdit(true)
                             openModal()
@@ -26,7 +27,7 @@ export function ActionButton({ value, column, row }) {
                 <div className="grid grid-rows-1">
                     <button
                         type="button"
-                        onClick={()=>{
+                        onClick={() => {
                             setContextData(row.original)
                             setOnDelete(true)
                         }}
@@ -41,14 +42,14 @@ export function ActionButton({ value, column, row }) {
 }
 
 export function ApprovalButton({ value, column, row }) {
-    const {onEdit, setOnEdit, openModal, setContextData, onDelete, setOnDelete, setApprove} = useContext(AdminContext)
+    const { onEdit, setOnEdit, openModal, setContextData, onDelete, setOnDelete, setApprove } = useContext(AdminContext)
     return (
         <div className="items-center mx-3">
             <div className="grid grid-cols-2">
                 <div className="grid grid-rows-1">
                     <button
                         type="button"
-                        onClick={()=>{
+                        onClick={() => {
                             setContextData(row.original)
                             setOnEdit(true)
                             openModal()
@@ -57,7 +58,7 @@ export function ApprovalButton({ value, column, row }) {
                         className={classNames(
                             "w-1/8 border rounded-xl px-5 mr-1 py-2",
                             row.original.status === 0 ? "bg-orange-500 font-sans text-white font-bold" : "bg-gray-500 font-sans text-white font-bold"
-                          )}
+                        )}
                     >
                         Approve
                     </button>
@@ -68,14 +69,14 @@ export function ApprovalButton({ value, column, row }) {
 }
 
 export function ViewButton({ value, column, row }) {
-    const {onEdit, setOnEdit, openModal, setContextData, onDelete, setOnDelete, setApprove} = useContext(AdminContext)
+    const { onEdit, setOnEdit, openModal, setContextData, onDelete, setOnDelete, setApprove } = useContext(AdminContext)
     return (
         <div className="items-center mx-3">
             <div className="grid grid-cols-2">
                 <div className="grid grid-rows-1">
                     <button
                         type="button"
-                        onClick={()=>{
+                        onClick={() => {
                             setContextData(row.original)
                             openModal()
                         }}
@@ -91,20 +92,45 @@ export function ViewButton({ value, column, row }) {
 
 export function StatusPill({ value }) {
     const status = value === 0 ? "Proses" : (value === 1 ? "Ditolak" : "Diterima");
-  
+
     return (
-      <span
-        className={classNames(
-          "px-3 py-1 uppercase leading-wide font-bold text-xs rounded-full shadow-sm",
-          status.startsWith("Diterima") ? "bg-green-100 text-green-700" : null,
-          status.startsWith("Proses") ? "bg-yellow-100 text-yellow-700" : null,
-          status.startsWith("Ditolak") ? "bg-red-100 text-red-700" : null
-        )}
-      >
-        {status}
-      </span>
+        <span
+            className={classNames(
+                "px-3 py-1 uppercase leading-wide font-bold text-xs rounded-full shadow-sm",
+                status.startsWith("Diterima") ? "bg-green-100 text-green-700" : null,
+                status.startsWith("Proses") ? "bg-yellow-100 text-yellow-700" : null,
+                status.startsWith("Ditolak") ? "bg-red-100 text-red-700" : null
+            )}
+        >
+            {status}
+        </span>
     );
-  }
+}
+
+export function StatusPill2({ value }) {
+    const status = value == 0 ? "Tidak Aktif" : "Aktif";
+    return (
+        <span
+            className={classNames(
+                "px-3 py-1 uppercase leading-wide font-bold text-xs rounded-full shadow-sm",
+                status.startsWith("Aktif") ? "bg-green-100 text-green-700" : null,
+                status.startsWith("Tidak Aktif") ? "bg-red-100 text-red-700" : null
+            )}
+        >
+            {status}
+        </span>
+    );
+}
+
+export function DateRenderer({ value }) {
+    var date = new DateObject(value);
+    console.log(date)
+    var dateParsed = date.format("DD-MM-YYYY")
+    console.log(dateParsed)
+    return (
+        dateParsed
+    );
+}
 
 export function SelectColumnFilter({
     column: { filterValue, setFilter, preFilteredRows, id },
@@ -167,7 +193,7 @@ function GlobalFilter({
     )
 }
 
-function Table({ columns, data }) {
+function Table({ columns, data, isSearch, isPagination }) {
     // Use the state and functions returned from useTable to build your UI
     const { getTableProps,
         getTableBodyProps,
@@ -198,24 +224,27 @@ function Table({ columns, data }) {
     // Render the UI for your table
     return (
         <>
-            <div className="flex gap-x-2">
-                <GlobalFilter
-                    preGlobalFilteredRows={preGlobalFilteredRows}
-                    globalFilter={state.globalFilter}
-                    setGlobalFilter={setGlobalFilter}
-                />
+            {isSearch ?
+                <div className="flex gap-x-2">
+                    <GlobalFilter
+                        preGlobalFilteredRows={preGlobalFilteredRows}
+                        globalFilter={state.globalFilter}
+                        setGlobalFilter={setGlobalFilter}
+                    />
 
-                {headerGroups.map((headerGroup) =>
-                    headerGroup.headers.map((column) =>
-                        column.Filter ? (
-                            <div key={column.id}>
-                                <label for={column.id}>{column.render("Header")}: </label>
-                                {column.render("Filter")}
-                            </div>
-                        ) : null
-                    )
-                )}
-            </div>
+                    {headerGroups.map((headerGroup) =>
+                        headerGroup.headers.map((column) =>
+                            column.Filter ? (
+                                <div key={column.id}>
+                                    <label for={column.id}>{column.render("Header")}: </label>
+                                    {column.render("Filter")}
+                                </div>
+                            ) : null
+                        )
+                    )}
+                </div> :
+                null
+            }
             <div className="mt-2 flex flex-col">
                 <div className="-my-2 overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">
                     <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -273,66 +302,67 @@ function Table({ columns, data }) {
                     </div>
                 </div>
             </div>
-
-            <div className="py-3 flex items-center justify-between">
-                <div className="flex-1 flex justify-between sm:hidden">
-                    <Button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</Button>
-                    <Button onClick={() => nextPage()} disabled={!canNextPage}>Next</Button>
-                </div>
-                <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-                    <div className="flex gap-x-2">
-                        <span className="text-sm text-gray-700">
-                            Page <span className="font-medium">{state.pageIndex + 1}</span> of <span className="font-medium">{pageOptions.length}</span>
-                        </span>
-                        <select
-                            value={state.pageSize}
-                            onChange={e => {
-                                setPageSize(Number(e.target.value))
-                            }}
-                        >
-                            {[5, 10, 20].map(pageSize => (
-                                <option key={pageSize} value={pageSize}>
-                                    Show {pageSize}
-                                </option>
-                            ))}
-                        </select>
+            {isPagination ?
+                <div className="py-3 flex items-center justify-between">
+                    <div className="flex-1 flex justify-between sm:hidden">
+                        <Button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</Button>
+                        <Button onClick={() => nextPage()} disabled={!canNextPage}>Next</Button>
                     </div>
-                    <div>
-                        <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                            <PageButton
-                                className="rounded-l-md"
-                                onClick={() => gotoPage(0)}
-                                disabled={!canPreviousPage}
+                    <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                        <div className="flex gap-x-2">
+                            <span className="text-sm text-gray-700">
+                                Page <span className="font-medium">{state.pageIndex + 1}</span> of <span className="font-medium">{pageOptions.length}</span>
+                            </span>
+                            <select
+                                value={state.pageSize}
+                                onChange={e => {
+                                    setPageSize(Number(e.target.value))
+                                }}
                             >
-                                <span className="sr-only">First</span>
-                                <ChevronDoubleLeftIcon className="h-5 w-5" aria-hidden="true" />
-                            </PageButton>
-                            <PageButton
-                                onClick={() => previousPage()}
-                                disabled={!canPreviousPage}
-                            >
-                                <span className="sr-only">Previous</span>
-                                <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-                            </PageButton>
-                            <PageButton
-                                onClick={() => nextPage()}
-                                disabled={!canNextPage
-                                }>
-                                <span className="sr-only">Next</span>
-                                <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-                            </PageButton>
-                            <PageButton
-                                className="rounded-r-md"
-                                onClick={() => gotoPage(pageCount - 1)}
-                                disabled={!canNextPage}
-                            >
-                                <span className="sr-only">Last</span>
-                                <ChevronDoubleRightIcon className="h-5 w-5" aria-hidden="true" />
-                            </PageButton>
-                        </nav>
+                                {[5, 10, 20].map(pageSize => (
+                                    <option key={pageSize} value={pageSize}>
+                                        Show {pageSize}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div>
+                            <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                <PageButton
+                                    className="rounded-l-md"
+                                    onClick={() => gotoPage(0)}
+                                    disabled={!canPreviousPage}
+                                >
+                                    <span className="sr-only">First</span>
+                                    <ChevronDoubleLeftIcon className="h-5 w-5" aria-hidden="true" />
+                                </PageButton>
+                                <PageButton
+                                    onClick={() => previousPage()}
+                                    disabled={!canPreviousPage}
+                                >
+                                    <span className="sr-only">Previous</span>
+                                    <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
+                                </PageButton>
+                                <PageButton
+                                    onClick={() => nextPage()}
+                                    disabled={!canNextPage
+                                    }>
+                                    <span className="sr-only">Next</span>
+                                    <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+                                </PageButton>
+                                <PageButton
+                                    className="rounded-r-md"
+                                    onClick={() => gotoPage(pageCount - 1)}
+                                    disabled={!canNextPage}
+                                >
+                                    <span className="sr-only">Last</span>
+                                    <ChevronDoubleRightIcon className="h-5 w-5" aria-hidden="true" />
+                                </PageButton>
+                            </nav>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </div> : null
+            }
         </>
     );
 }

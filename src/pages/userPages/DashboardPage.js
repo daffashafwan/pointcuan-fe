@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DashboardPointComponent from "../../components/DashboardPointComponent";
 import DashboardPointViewComponent from "../../components/DashboardPointViewComponent";
 import DashboardReedemPoint from "../../components/DashboardReedemPoint";
@@ -8,29 +8,43 @@ import DashboardRiwayatRedeem from "../../components/DashboardRiwayatRedeem";
 import DashboardRiwayatTransaksi from "../../components/DashboardRiwayatTransaksi";
 import UserDashboardNavbarComponent from "../../views/UserDashboardNavbarComponent";
 import UserFooterComponent from "../../views/UserFooterComponent";
+import { BASE_URL_API, HEADER_API } from "../../config/urlApi";
 import Swal from "sweetalert2";
+import axios from 'axios';
 import { storage } from "../../config/firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "@firebase/storage";
+import { useNavigate } from "react-router-dom";
+import { read_cookie, delete_cookie } from 'sfcookies';
 
 function DashboardPage() {
-  const percentage = 40;
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (read_cookie('user_cred').length < 1) {
+      navigate('/');
+    }
+  })
 
+  const percentage = 11;
+  const [url, setUrl] = useState()
   const [tambahPoint, setTambahPoint] = useState(false);
+  const [form, setForm] = useState({
+    transactionDate: "",
+    transaction: 0,
+    transactionAttachment: "",
+    status: 0,
+    userId: 0
+  })
   const [loadingUpload, setLoadingUpload] = useState(0);
+  const set = name => {
+    return ({ target: { value } }) => {
+      setForm(oldValues => ({ ...oldValues, [name]: value }));
+    }
+  };
 
   const handlerFormTransaksi = (e) => {
     e.preventDefault();
-    const totalTransaksi = e.target[0].value;
-    const tanggalTransaksi = e.target[1].value;
     const file = e.target[2].files[0];
     uploadFiles(file);
-    setTambahPoint(false);
-    Swal.fire({
-      icon: "success",
-      title: "Sukses",
-      text: "anda berhasil mengirimkan transaksi",
-      confirmButtonColor: "rgb(249 115 22)",
-    });
   };
 
   // upload to firebase
@@ -38,7 +52,6 @@ function DashboardPage() {
     if (!file) return;
     const storageRef = ref(storage, `/bukti/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
-
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -50,7 +63,32 @@ function DashboardPage() {
       (err) => console.log(err),
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-          console.log(url);
+          console.log(url)
+          var bodyFormData = {
+            transactionDate: form.transactionDate,
+            transaction: form.transaction,
+            transactionAttachment: url,
+            status: 0,
+            userId: read_cookie('user_cred'),
+          }
+          console.log(bodyFormData)
+          axios.post(BASE_URL_API + 'users/'+bodyFormData.userId+'/transaction', bodyFormData, HEADER_API)
+                .then(function (response) {
+                    console.log(response.data);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil Tambah Data',
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
+                    setTimeout(function () {
+                        setTambahPoint(false)
+                    }, 1000)
+
+                })
+                .catch(function (error) {
+                    console.log(error.response);
+                });
         });
       }
     );
@@ -85,6 +123,8 @@ function DashboardPage() {
                   type="number"
                   id="totalPenjualan"
                   name="totalPenjualan"
+                  value={form.transaction}
+                  onChange={set('transaction')}
                   className="border border-black w-full py-2 px-4 rounded-md my-3 outline-none"
                   required
                 />
@@ -95,6 +135,8 @@ function DashboardPage() {
                   type="date"
                   id="tanggal"
                   name="tanggal"
+                  value={form.transactionDate}
+                  onChange={set('transactionDate')}
                   className="border border-black w-full py-2 px-4 rounded-md my-3  outline-none"
                   required
                 />
@@ -138,7 +180,7 @@ function DashboardPage() {
                   <DashboardPointComponent setTambahPoint={setTambahPoint} />
                 </div>
                 <div className="flex justify-center basis-1/2 mr-3">
-                  <DashboardPointViewComponent percentage={percentage} />
+                  <DashboardPointViewComponent />
                 </div>
               </div>
               <div className="grid grid-cols-1 mx-2 justify--center">

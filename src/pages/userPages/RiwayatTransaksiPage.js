@@ -1,11 +1,19 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { useState } from "react/cjs/react.development";
 import UserDashboardNavbarComponent from "../../views/UserDashboardNavbarComponent";
 import UserFooterComponent from "../../views/UserFooterComponent";
 
 import TableRiwayatTransaksi from "../../components/TableRiwayatTransaksi";
+import { useNavigate } from "react-router-dom";
+import { read_cookie, delete_cookie } from 'sfcookies';
 
 function RiwayatTransaksiPage() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (read_cookie('user_cred').length < 1) {
+      navigate('/');
+    }
+  })
   const [statusTransaksi, setStatusTransaksi] = useState(0);
   return (
     <div className="flex flex-col h-screen">
