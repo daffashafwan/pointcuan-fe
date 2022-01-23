@@ -115,7 +115,7 @@ function DashboardPage() {
                 onSubmit={handlerFormTransaksi}
               >
                 <p className="text-center font-semibold text-3xl mb-5">
-                  Dapatkan Point {url ? url : "skip"}
+                  Dapatkan Point
                 </p>
                 <label for="totalPenjualan">Total Penjualan</label>
                 <br />

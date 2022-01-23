@@ -30,6 +30,7 @@ function DashboardReedemPoint() {
           {
             data?.map(function (x) {
               return (<RedeemKategori
+                id={x.id}
                 name={x.name}
                 svg={x.svg}
               />)

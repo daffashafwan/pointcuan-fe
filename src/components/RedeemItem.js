@@ -1,114 +1,52 @@
 import React, { useState, useEffect, useContext } from "react";
-import { AdminContext } from "../../../../contexts/AdminContext";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { BASE_URL_API, HEADER_API_ADMIN } from "../../../../config/urlApi";
+import { BASE_URL_API, HEADER_API } from "../config/urlApi";
 import Select from "react-select";
+import { RedeemContext } from "../contexts/RedeemContext";
+import { read_cookie } from "sfcookies";
 
-const FormPage = () => {
+const RedeemItem = (value) => {
+    const { openModal, isModalOpen, closeModal, contextData } = useContext(RedeemContext)
     const [data, setData] = useState()
-    const [option, setOption] = useState()
-    const { contextData, onEdit, setOnEdit, closeModal, openModal, isModalOpen } = useContext(AdminContext)
     useEffect(() => {
-        axios.get(BASE_URL_API + 'categoryitems', HEADER_API_ADMIN)
+        setData()
+        axios.get(BASE_URL_API + "users/" + read_cookie('user_cred'), HEADER_API)
             .then(function (response) {
+                console.log(response.data.data);
                 setData(response.data.data)
-                //console.log(response.data.data);
             })
             .catch(function (error) {
                 console.log(error.response);
             });
+        console.log(contextData)
     }, [])
-
     const [formState, setFormState] = useState({
-        name: "",
-        categoryId: "",
-        pointRedeem: "",
-        stock: "",
+        userId: "",
+        itemId: "",
+        dataRedeem: "",
     });
 
-    useEffect(() => {
-        if (onEdit) {
-            setFormState({
-                categoryId: contextData.categoryId,
-                name: contextData.name,
-                pointRedeem: contextData.pointRedeem,
-                stock: contextData.stock
-            })
-            setOption({
-                id: contextData.category.Id,
-                name: contextData.category.Name
-            })
-            console.log(option)
-        }
-    }, [onEdit])
-
-    const handleEdit = () => {
-        if (formState.name === "") {
-            Swal.fire(
-                'Gagal Update Item',
-                'Field Belum Terisi',
-                'warning'
-            )
-        } else {
-            var bodyFormData = {
-                name: formState.name,
-                categoryId: option.id,
-                pointRedeem: formState.pointRedeem,
-                stock: formState.stock,
-            }
-            console.log(bodyFormData)
-            console.log(contextData.id)
-            axios.put(BASE_URL_API + 'items/' + contextData.id, bodyFormData, HEADER_API_ADMIN)
-                .then(function (response) {
-                    console.log(response.data);
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Berhasil Update Data',
-                        showConfirmButton: false,
-                        timer: 1000
-                    });
-                    setFormState({
-                        name: "",
-                        categoryId: "",
-                        pointRedeem: "",
-                        stock: "",
-                    })
-                    setOption()
-                    setTimeout(function () {
-                        setOnEdit(false)
-                        closeModal()
-                    }, 1000)
-
-                })
-                .catch(function (error) {
-                    console.log(error.response);
-                });
-        }
-    }
-
     const handleCreate = () => {
-        console.log(option)
-        if (formState.name === "") {
+        if (formState.dataRedeem === "") {
             Swal.fire(
                 'Gagal Menambahkan Item',
-                'field Belum Terisi',
+                'field data Belum Terisi',
                 'warning'
             )
         } else {
             var bodyFormData = {
-                name: formState.name,
-                categoryId: option.id,
-                pointRedeem: formState.pointRedeem,
-                stock: formState.stock,
+                userId: read_cookie("user_cred"),
+                itemId: contextData.id,
+                dataRedeem: formState.dataRedeem,
             }
             console.log(bodyFormData)
-            axios.post(BASE_URL_API + 'items', bodyFormData, HEADER_API_ADMIN)
+            axios.post(BASE_URL_API + 'users/' + read_cookie("user_cred") + "/redeem", bodyFormData, HEADER_API)
                 .then(function (response) {
                     console.log(response.data);
                     Swal.fire({
                         icon: 'success',
-                        title: 'Berhasil Tambah Data',
+                        title: 'Berhasil Redeem',
                         showConfirmButton: false,
                         timer: 1000
                     });
@@ -138,9 +76,11 @@ const FormPage = () => {
                     <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                         {/*header*/}
                         <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                            <h3 className="text-3xl font-semibold">
-                                Kategori Baru
-                            </h3>
+                            <div className="grid grid-cols-1 items-center text-center">
+                                <h3 className="text-3xl font-semibold">
+                                    Redeem Item
+                                </h3>
+                            </div>
                             <button
                                 className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                                 onClick={() => closeModal()}
@@ -154,8 +94,8 @@ const FormPage = () => {
                         <div className="relative p-6 flex-auto">
                             <input
                                 type="text"
-                                value={formState.name}
-                                onChange={set('name')}
+                                readOnly
+                                value={contextData.name}
                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 placeholder="Nama Item"
                             />
@@ -163,8 +103,8 @@ const FormPage = () => {
                         <div className="relative p-6 flex-auto">
                             <input
                                 type="number"
-                                value={formState.pointRedeem}
-                                onChange={set('pointRedeem')}
+                                readOnly
+                                value={contextData.pointRedeem}
                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 placeholder="Point Item"
                             />
@@ -172,25 +112,17 @@ const FormPage = () => {
                         <div className="relative p-6 flex-auto">
                             <input
                                 type="text"
-                                value={formState.stock}
-                                onChange={set('stock')}
+                                value={formState.dataRedeem}
+                                onChange={set('dataRedeem')}
                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                placeholder="Jumlah Stock"
+                                placeholder="Data Redeem"
                             />
                         </div>
                         <div className="relative p-6 flex-auto">
-                            {data ?
-                                <Select
-                                    name="categoryId"
-                                    options={data}
-                                    value={option}
-                                    onChange={setOption}
-                                    getOptionLabel={(option) => option.name}
-                                    getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
-                                />
-                                :
-                                "Loading"
-                            }
+                            Point Anda : {data ? data.point : "Loading..."}
+                        </div>
+                        <div className="relative px-6 flex-auto font-semibold text-orange-500">
+                            {data ? (data.point - contextData.pointRedeem >= 0 ? "Cukup untuk Redeem" : "Tidak Cukup Untuk Redeem") : "Loading..."}
                         </div>
                         {/*footer*/}
                         <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
@@ -198,9 +130,6 @@ const FormPage = () => {
                                 className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                 type="button"
                                 onClick={() => {
-                                    if (onEdit) {
-                                        setOnEdit(false)
-                                    }
                                     closeModal()
                                 }}
                             >
@@ -210,17 +139,12 @@ const FormPage = () => {
                                 className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                 type="button"
                                 onClick={() => {
-                                    console.log(onEdit)
-                                    if (onEdit) {
-                                        handleEdit()
-                                    } else {
-                                        handleCreate()
-                                    }
+                                    handleCreate()
                                 }
 
                                 }
                             >
-                                Tambah
+                                Redeem
                             </button>
                         </div>
                     </div>
@@ -231,4 +155,4 @@ const FormPage = () => {
     )
 }
 
-export default FormPage;
+export default RedeemItem;
