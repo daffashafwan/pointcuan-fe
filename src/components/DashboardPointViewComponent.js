@@ -20,7 +20,8 @@ function DashboardPointViewComponent() {
     axios.post(BASE_URL_API + 'users/' + read_cookie('user_cred')+"/transaction/status",bodyFormData, HEADER_API)
       .then(function (response) {
         setDataTrans(response.data.data)
-        //console.log(response.data.data);
+        console.log("tes")
+        console.log(response.data.data);
       })
       .catch(function (error) {
         console.log(error.response);
@@ -28,7 +29,8 @@ function DashboardPointViewComponent() {
       axios.get(BASE_URL_API + 'users/' + read_cookie('user_cred')+"/redeem", HEADER_API)
       .then(function (response) {
         setDataRed(response.data.data)
-        //console.log(response.data.data);
+        console.log("tes2")
+        console.log(response.data.data);
       })
       .catch(function (error) {
         console.log(error.response);
@@ -36,16 +38,15 @@ function DashboardPointViewComponent() {
   },[])
 
   useEffect(() => {
-      if(dataRed && dataTrans){
+      if(dataRed || dataTrans){
         var pointIn = 0
         var pointOut = 0
-        dataRed.forEach(element => {
+        dataRed?.forEach(element => {
           pointOut = pointOut + element.point
         });
-        dataTrans.forEach(element => {
+        dataTrans?.forEach(element => {
           pointIn = pointIn + element.point
         });
-        console.log((pointOut / pointIn)*100)
         setData({
           percentage : (pointOut / pointIn)*100,
           pointIn : pointIn,

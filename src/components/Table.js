@@ -124,9 +124,7 @@ export function StatusPill2({ value }) {
 
 export function DateRenderer({ value }) {
     var date = new DateObject(value);
-    console.log(date)
     var dateParsed = date.format("DD-MM-YYYY")
-    console.log(dateParsed)
     return (
         dateParsed
     );
