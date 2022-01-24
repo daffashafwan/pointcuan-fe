@@ -5,7 +5,7 @@ import { BASE_URL_API, HEADER_API } from "../../../config/urlApi";
 import FAQ from './FAQ';
 import UserFooterComponent from '../../../views/UserFooterComponent';
 import UserDashboardNavbarComponent from '../../../views/UserDashboardNavbarComponent';
-import { Navigate } from "react-router";
+import { useNavigate } from "react-router";
 function FaqPage() {
   const [data, setData] = useState()
   const navigate = useNavigate();
