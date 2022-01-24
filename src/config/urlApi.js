@@ -23,5 +23,5 @@ export var HEADER_API = {
 }
 
 
-// export const BASE_URL_API = "http://ec2-18-222-12-16.us-east-2.compute.amazonaws.com:1223/";
-export const BASE_URL_API = "http://localhost:1223/";
+export const BASE_URL_API = "http://ec2-18-222-12-16.us-east-2.compute.amazonaws.com:1223/";
+// export const BASE_URL_API = "http://localhost:1223/";

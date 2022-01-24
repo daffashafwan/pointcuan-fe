@@ -37,7 +37,11 @@ function LoginPage() {
       address: formState.address,
     }
     axios.post(BASE_URL_API + 'users/login',
-      bodyFormData)
+      bodyFormData,{
+        headers:{
+          'Access-Control-Allow-Origin' : '*',
+        }
+      })
       .then(function (response) {
         Swal.fire({
           position: 'top-end',
