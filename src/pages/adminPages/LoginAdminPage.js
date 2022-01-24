@@ -32,7 +32,7 @@ function LoginAdminPage() {
       password: formState.password,
     }
     axios.post(BASE_URL_API + 'admin/login',
-      bodyFormData)
+      bodyFormData, HEADER_API_ADMIN)
       .then(function (response) {
         Swal.fire({
           position: 'top-end',
