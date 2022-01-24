@@ -31,11 +31,7 @@ function LoginAdminPage() {
       username: formState.username,
       password: formState.password,
     }
-    axios.post(BASE_URL_API + 'admin/login',{
-      headers:{
-        'Access-Control-Allow-Origin' : '*',
-      }
-    },
+    axios.post(BASE_URL_API + 'admin/login',
       bodyFormData)
       .then(function (response) {
         Swal.fire({
