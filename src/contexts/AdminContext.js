@@ -7,6 +7,7 @@ const AppProvider = ({ children }) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [onEdit, setOnEdit] = useState(false);
 	const [approve, setApprove] = useState(false);
+	const [activate, setActivate] = useState(false);
 	const [onDelete, setOnDelete] = useState(false);
 	const [menu, setMenu] = useState(1)
 	const [contextData, setContextData] = useState();
@@ -29,7 +30,7 @@ const AppProvider = ({ children }) => {
 
 	return (
 		<AdminContext.Provider
-			value={{ isSidebarOpen, openSidebar, closeSidebar, menu, setMenu, contextData, setContextData, openModal, closeModal, isModalOpen, onEdit, setOnEdit, onDelete, setOnDelete, approve, setApprove }}
+			value={{ activate, setActivate, isSidebarOpen, openSidebar, closeSidebar, menu, setMenu, contextData, setContextData, openModal, closeModal, isModalOpen, onEdit, setOnEdit, onDelete, setOnDelete, approve, setApprove }}
 		>
 			{children}
 		</AdminContext.Provider>

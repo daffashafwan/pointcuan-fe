@@ -25,6 +25,18 @@ const UserPage = () => {
             });
     }, [])
 
+    useEffect(() => {
+        axios.get(BASE_URL_API + 'users', HEADER_API_ADMIN)
+            .then(function (response) {
+                console.log(response.data.data);
+                setData(response.data.data)
+                //console.log(response.data.data);
+            })
+            .catch(function (error) {
+                console.log(error.response);
+            });
+    }, [isModalOpen])
+
     const columns = [
         {
             Header: 'Nama User',
