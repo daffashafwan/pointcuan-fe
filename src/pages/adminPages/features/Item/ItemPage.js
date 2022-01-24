@@ -126,6 +126,8 @@ const ItemPage = () => {
                         }
                     {data ?
                             <Table
+                                isSearch={true}
+                                isPagination={true}
                                 columns={columns}
                                 data={data}
                             />

@@ -51,23 +51,23 @@ const FAQPage = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(BASE_URL_API + 'faq/' + contextData.id, HEADER_API_ADMIN )
-            .then(function (response) {
-                console.log(response.data);
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Berhasil Hapus Data',
-                    showConfirmButton: false,
-                    timer: 1000
-                });
-                setTimeout(function () {
-                    setOnDelete(false)
-                }, 1000)
-            })
-            .catch(function (error) {
-                console.log(error.response);
-            });
-            }else{
+                axios.delete(BASE_URL_API + 'faq/' + contextData.id, HEADER_API_ADMIN)
+                    .then(function (response) {
+                        console.log(response.data);
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil Hapus Data',
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                        setTimeout(function () {
+                            setOnDelete(false)
+                        }, 1000)
+                    })
+                    .catch(function (error) {
+                        console.log(error.response);
+                    });
+            } else {
                 setOnDelete(false)
             }
         })
@@ -116,12 +116,14 @@ const FAQPage = () => {
                 <div className="mt-10 w-full aspect-w-0 aspect-h-0 flex justify-center">
                     <div className="basis-full px-5 xl:px-0">
                         {isModalOpen ?
-                           <FormPage/>
+                            <FormPage />
                             : null
 
                         }
                         {data ?
                             <Table
+                                isSearch={true}
+                                isPagination={true}
                                 columns={columns}
                                 data={data}
                             />

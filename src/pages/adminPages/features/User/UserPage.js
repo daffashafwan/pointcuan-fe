@@ -68,6 +68,8 @@ const UserPage = () => {
                         }
                     {data ?
                             <Table
+                            isSearch={true}
+                                isPagination={true}
                                 columns={columns}
                                 data={data}
                             />
