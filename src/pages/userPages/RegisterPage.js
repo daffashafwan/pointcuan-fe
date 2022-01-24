@@ -40,7 +40,11 @@ function RegisterPage() {
       address: formState.address,
     }
     axios.post(BASE_URL_API + 'users/register',
-      bodyFormData, HEADER_API)
+      bodyFormData, {
+        headers:{
+          'Access-Control-Allow-Origin' : '*',
+        }
+      })
       .then(function (response) {
         Swal.fire({
           position: 'top-end',
