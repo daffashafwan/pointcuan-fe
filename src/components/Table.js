@@ -69,7 +69,7 @@ export function ApprovalButton({ value, column, row }) {
 }
 
 export function ViewButton({ value, column, row }) {
-    const { onEdit, setOnEdit, openModal, setContextData, onDelete, setOnDelete, setApprove } = useContext(AdminContext)
+    const {  activate, setActivate, onEdit, setOnEdit, openModal, setContextData, onDelete, setOnDelete, setApprove } = useContext(AdminContext)
     return (
         <div className="items-center mx-3">
             <div className="grid grid-cols-2">
@@ -83,6 +83,23 @@ export function ViewButton({ value, column, row }) {
                         className="w-1/8 border rounded-xl px-5 mr-1 py-2 bg-orange-500 font-sans text-white font-bold"
                     >
                         View Point
+                    </button>
+                </div>
+                <div className="grid grid-rows-1">
+                    <button
+                        type="button"
+                        onClick={() => {
+                            setContextData(row.original)
+                            openModal()
+                            setActivate(true)
+                        }}
+                        disabled={row.original.status === "1" ? true : false}
+                        className={classNames(
+                            "w-1/8 border rounded-xl px-5 mr-1 py-2",
+                            row.original.status === "1" ? "bg-green-200 font-sans text-white font-bold" : "bg-green-500 font-sans text-white font-bold"
+                        )}
+                    >
+                        Activate
                     </button>
                 </div>
             </div>
