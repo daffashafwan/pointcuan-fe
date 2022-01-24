@@ -15,7 +15,6 @@ function DashboardPointComponent({ setTambahPoint }) {
   useEffect(() => {
     axios.get(BASE_URL_API + 'users/' + read_cookie('user_cred'), HEADER_API)
       .then(function (response) {
-        console.log(response.data.data);
         setData(response.data.data)
         //console.log(response.data.data);
       })

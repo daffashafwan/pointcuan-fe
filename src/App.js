@@ -22,7 +22,7 @@ function App() {
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/riwayattransaksi" element={<RiwayatTransaksiPage />} />
         <Route path="/riwayatredeem" element={<RiwayatRedeemPage />} />
-        <Route path="/verificationsuccess" element={<VerificationSuccess/>}/>
+        <Route path="/users/verify/:token" element={<VerificationSuccess/>}/>
         <Route path="/redeem/:categoryId" element={<RedeemPage />} />
         <Route path="/faq" element={<FaqPage />} />
         <Route path="/loginadmin" element={<LoginAdminPage />} />

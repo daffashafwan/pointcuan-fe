@@ -118,6 +118,8 @@ const TransactionPage = () => {
                         }
                         {data ?
                             <Table
+                                isPagination={true}
+                                isSearch={true}
                                 columns={columns}
                                 data={data}
                             />

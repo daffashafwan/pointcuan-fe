@@ -1,9 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
+import { read_cookie } from "sfcookies";
+import { BASE_URL_API, HEADER_API } from "../../../config/urlApi";
 import FAQ from './FAQ';
 import UserFooterComponent from '../../../views/UserFooterComponent';
 import UserDashboardNavbarComponent from '../../../views/UserDashboardNavbarComponent';
 
 function FaqPage () {
+  const [data, setData] = useState()
+  useEffect(() => {
+    axios.get(BASE_URL_API + read_cookie('user_cred') + '/faq', HEADER_API)
+        .then(function (response) {
+          console.log(response.data.data);
+          setData(response.data.data)
+          data.map(function(x){
+            x['open'] = false
+          })
+          console.log(data)
+        })
+        .catch(function (error) {
+            console.log(error.response);
+        });
+}, [])
   const [faqs, setfaqs] = useState([
     {
       question: 'Apa itu PointCuan?',
@@ -48,7 +66,7 @@ function FaqPage () {
   ]);
 
   const toggleFAQ = index => {
-    setfaqs(faqs.map((faq, i) => {
+    setData(data.map((faq, i) => {
       if (i === index) {
         faq.open = !faq.open
       } else {
@@ -70,7 +88,7 @@ function FaqPage () {
 			<h1>FAQ</h1>
 		</header>
       <div className="faqs">
-        {faqs.map((faq, i) => (
+        {data?.map((faq, i) => (
           <FAQ faq={faq} index={i} toggleFAQ={toggleFAQ} />
         ))}
       </div>

@@ -1,9 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router";
 
 function UserFooterComponent() {
+  const navigate = useNavigate()
   return (
     <div className="bg-white border-t-2 border-gray text-center font-semibold py-4 text-xs md:text-sm mt-10 ">
-      Tutorial • Cara Kerja • FAQ • Syarat dan Ketentuan • Kebijakan Privasi
+      Tutorial • Cara Kerja •
+      <button className=" py-4 text-xs md:text-sm mt-10 font-semibold  border-t-2 border-gray " onClick={() => navigate('/faq')}>
+        FAQ
+      </button>
+      • Syarat dan Ketentuan • Kebijakan Privasi
     </div>
   );
 }

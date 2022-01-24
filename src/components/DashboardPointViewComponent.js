@@ -19,8 +19,6 @@ function DashboardPointViewComponent() {
     }
     axios.post(BASE_URL_API + 'users/' + read_cookie('user_cred')+"/transaction/status",bodyFormData, HEADER_API)
       .then(function (response) {
-        console.log("WOI")
-        console.log(response.data.data);
         setDataTrans(response.data.data)
         //console.log(response.data.data);
       })
@@ -29,19 +27,12 @@ function DashboardPointViewComponent() {
       });
       axios.get(BASE_URL_API + 'users/' + read_cookie('user_cred')+"/redeem", HEADER_API)
       .then(function (response) {
-        console.log("WOIRedeem")
-        console.log(response.data.data);
         setDataRed(response.data.data)
         //console.log(response.data.data);
       })
       .catch(function (error) {
         console.log(error.response);
       });
-      if(dataTrans && dataRed){
-        console.log("Ada")
-        console.log(dataTrans)
-        console.log(dataRed)
-      }
   },[])
 
   useEffect(() => {
