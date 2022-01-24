@@ -189,6 +189,18 @@ function RegisterPage() {
                 </div>
               </div>
               <div>
+                <input
+                  id="address"
+                  name="address"
+                  type="text"
+                  value={formState.address}
+                  onChange={set('address')}
+                  required
+                  placeholder="Address"
+                  className="w-full py-2 px-3 text-primary border border-gray-600 rounded-xl outline-none text-sm transition duration-150 ease-in-out mb-4"
+                />
+              </div>
+              <div>
                 <button
                   type="submit"
                   className="w-full border  rounded-xl px-5 py-2 bg-orange-500 font-sans text-white font-bold "
