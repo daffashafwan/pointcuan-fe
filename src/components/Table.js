@@ -147,6 +147,14 @@ export function DateRenderer({ value }) {
     );
 }
 
+export function CurrencyRenderer({ value }) {
+    var val = new Number(value);
+    var valParsed = Math.round(val)
+    return (
+       "Rp" + valParsed
+    );
+}
+
 export function SelectColumnFilter({
     column: { filterValue, setFilter, preFilteredRows, id },
 }) {

@@ -3,8 +3,12 @@ import { AdminContext } from "../contexts/AdminContext";
 import { links } from '../datas/AdminSidebarData';
 import { MenuIcon } from '@heroicons/react/solid';
 import { Route, Switch } from "react-router";
+import { delete_cookie } from "sfcookies";
+import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const AdminSidebar = () => {
+    const navigate = useNavigate()
     const [isMobile, setIsMobile] = useState(false)
     const [clicked, setClicked] = useState(1)
     const { menu, setMenu, isSidebarOpen, closeSidebar } = useContext(AdminContext);
@@ -21,7 +25,21 @@ const AdminSidebar = () => {
     useEffect(() => {
         window.addEventListener("resize", handleResize)
     }, [])
-      
+    const handleLogout = () =>{
+        delete_cookie('admin_cred');
+        delete_cookie('jwt_admin');
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Berhasil Logout',
+            showConfirmButton: false,
+            timer: 1200
+        });
+        setTimeout(function(){
+            navigate('/loginadmin');
+        }, 1500)
+    }
+
 
     return (
 
@@ -62,8 +80,8 @@ const AdminSidebar = () => {
                                     key={id}
                                     onClick={() => handleMenu(id)}
                                     className={`capitalize btn-menu btn-${id} flex items-center px-4 py-2 ${index > -1
-                                            ? 'mt-5 text-gray-600 hover:bg-gray-200 hover:text-gray-700 transition-colors duration-200 transform'
-                                            : null
+                                        ? 'mt-5 text-gray-600 hover:bg-gray-200 hover:text-gray-700 transition-colors duration-200 transform'
+                                        : null
                                         } rounded-md`}
                                 >
                                     {icon}
@@ -76,14 +94,14 @@ const AdminSidebar = () => {
                         <hr className="my-6" />
                     </nav>
                     <div className="flex items-center px-4 -mx-2 mt-5">
-                        <img
-                            src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-                            alt="avatar"
-                            className="h-9 w-9 mx-2 object-center object-cover rounded-full"
-                        />
                         <h4 className="mx-2 font-medium text-gray-800 hover:underline cursor-pointer">
                             Admin
                         </h4>
+                        <button onClick={handleLogout}>
+                            <h5 className="mx-2 font-medium text-orange-800 hover:underline cursor-pointer">
+                                Logout
+                            </h5>
+                        </button>
                     </div>
                 </div>
             </div>
