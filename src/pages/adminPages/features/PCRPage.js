@@ -64,7 +64,7 @@ const PCRPage = () => {
     return (
         <div className="container mx-auto">
             <div className="grid grid-cols-1 gap-y-5 gap-x-5 sm:grid-cols-1 sm:gap-x-6 lg:grid-cols-1 xl:grid-cols-1 xl:gap-x-1 ">
-                <div className="w-full aspect-w-0 aspect-h-0 flex justify-center">
+                <div className="mt-10 w-full aspect-w-0 aspect-h-0 flex">
                     <form className="xl:basis-1/2 basis-full px-5 xl:px-0">
                         <div className="grid inline text-left  mb-10 mt-20 xl:mt-40">
                             <h1 className="inline font-sans text-3xl xl:text-4xl text-left font-medium text-orange-500">
