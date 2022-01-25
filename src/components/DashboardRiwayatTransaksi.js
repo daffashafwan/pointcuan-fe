@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Table,{DateRenderer} from "./Table"
+import Table,{DateRenderer, CurrencyRenderer} from "./Table"
 import { read_cookie } from 'sfcookies';
 import axios from 'axios';
 import { BASE_URL_API, HEADER_API } from "../config/urlApi";
@@ -26,6 +26,7 @@ function DashboardRiwayatTransaksi() {
     {
       Header: 'Nominal Transaksi',
       accessor: "transaction",
+      Cell: CurrencyRenderer
     },
     {
       Header: 'Point',

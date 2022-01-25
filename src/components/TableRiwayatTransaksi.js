@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AiFillEye, AiOutlineClose } from "react-icons/ai";
-import Table,{DateRenderer} from "./Table";
+import Table,{DateRenderer, CurrencyRenderer} from "./Table";
 import { read_cookie } from 'sfcookies';
 import axios from 'axios';
 import { BASE_URL_API, HEADER_API } from "../config/urlApi";
@@ -30,6 +30,7 @@ function TableRiwayatTransaksi({ statusTransaksi }) {
     {
       Header: 'Nominal',
       accessor: "transaction",
+      Cell: CurrencyRenderer
     },
     {
       Header: 'Point',
