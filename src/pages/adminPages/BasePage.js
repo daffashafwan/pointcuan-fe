@@ -18,7 +18,7 @@ const BasePage = () => {
         <AppProvider>
             <>
                 <div className="grid grid-cols-5">
-                    <div className="grid grid-cols-1">
+                    <div className="grid grid-cols-1 px-5">
                         <AdminSidebarToggler />
                         <AdminSidebar />
                     </div>
