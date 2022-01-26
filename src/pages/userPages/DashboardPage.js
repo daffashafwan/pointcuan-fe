@@ -22,6 +22,9 @@ function DashboardPage() {
     if (read_cookie('user_cred').length < 1) {
       navigate('/');
     }
+    if(HEADER_API.headers.Authorization === "Bearer "){
+      window.location.reload();
+    }
   })
 
   const percentage = 11;
