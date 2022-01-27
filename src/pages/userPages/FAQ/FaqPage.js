@@ -16,7 +16,7 @@ function FaqPage() {
   });
   useEffect(() => {
     axios
-      .get(BASE_URL_API + read_cookie("user_cred") + "/faq", HEADER_API)
+      .get(BASE_URL_API + read_cookie("user_cred") + "/faq/active", HEADER_API)
       .then(function (response) {
         console.log(response.data.data);
         setData(response.data.data);

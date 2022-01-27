@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../../assets/images/logo.svg";
 import axios from "axios";
+import { read_cookie } from "sfcookies";
 import { BASE_URL_API, HEADER_API_ADMIN } from "../../config/urlApi";
 import { useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
@@ -8,8 +9,8 @@ import { bake_cookie } from 'sfcookies';
 import Swal from "sweetalert2";
 
 function LoginAdminPage() {
+  const navigate = useNavigate()
   const [hidePass, setHidePass] = useState(false);
-  const navigate = useNavigate();
   const handlerHidePass = () => {
     setHidePass(!hidePass);
   };
@@ -69,10 +70,10 @@ function LoginAdminPage() {
   const onSubmit = async (event) => {
     event.preventDefault(); // Prevent default submission
     try {
-        await handleLogin();
-        setFormState({
-          username: '', password: ''
-        });
+      await handleLogin();
+      setFormState({
+        username: '', password: ''
+      });
     } catch (e) {
       console.log(e.message)
     }
