@@ -126,7 +126,7 @@ function LoginPage() {
                   type={hidePass == true ? "text" : "password"}
                   required
                   placeholder="Password"
-                  className="w-20 basis-full py-2 px-5 text-sm md:text-base rounded-xl focus:outline-0 focus:outline-transparent focus:ring-0 focus:border-none "
+                  className="w-20 basis-full py-2 px-5 text-sm md:text-base rounded-xl focus:outline-0 focus:outline-transparent focus:ring-0 focus:border-none border-none"
                 />
                 <div
                   className=" inline basis-2 w-full justify-end align-middle"
